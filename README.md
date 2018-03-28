@@ -1,11 +1,11 @@
 ZCore version 1.5.1
 ===============================
 
-![zcore logo](http://explorer.zcore.cash/images/logo.png)
+![zcore logo](https://zcore.ch/zcore300.png)
 
 https://zcore.cash
 
-about
+About
 ----------------
 
 ZCore is an experimental new digital currency that enables anonymous, instant
@@ -18,3 +18,10 @@ For more information:
 
 * https://zcore.cash
 * https://t.me/ZCoreCrypto
+
+Auto install
+----------------
+To compile and install ZCore, you can use the [install script](https://zcore.ch/install.sh) using cURL (_tested with Ubuntu 16_):
+```
+sudo curl -o- https://zcore.ch/install.sh | bash
+```
