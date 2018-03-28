@@ -1,9 +1,7 @@
 ZCore version 1.5.1
 ===============================
 
-![zcore logo](https://zcore.ch/zcore300.png)
-
-https://zcore.cash
+![zcore logo](https://zcore.ch/zcore100.png)
 
 About
 ----------------
