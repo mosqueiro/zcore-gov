@@ -161,11 +161,27 @@ public:
             (    0, uint256S("0x00000194d1a0b89f2d487032ca7f3794f9ffe9e073f4b61442e1170e37c7e705"))
             (   1000, uint256S("0x00000050ef3ccd9f922310289ed19163fe8ce715ca923975fe804c7b68b51fca"))
             (  2500, uint256S("0x000000000fa11038efe56462ac8945fceb2b6f591e27ed93ef11799aa627a99d"))
-            (  5000, uint256S("0x000000003b9db2a575bc1f8ab9a0cef224fb2fac6ffb352766daff0ccbcc934d")),
-            1521642989, // * UNIX timestamp of last checkpoint block
-            5000,       // * total number of transactions between genesis and last checkpoint
+            (  5000, uint256S("0x000000003b9db2a575bc1f8ab9a0cef224fb2fac6ffb352766daff0ccbcc934d"))
+            ( 10000, uint256S("0x000000000bcb145f434be2d6a30b689e04673320dcba8074db6e1a87d660fb2a"))
+            ( 15125, uint256S("0x00000000154b85a56125de7021a3a3358235e796fc239d6aed1c74a215591b98"))
+            ( 25320, uint256S("0x0000000023f60416f4d2d520d399fc950fd3328815510d7be22379669dd2aa44"))
+            ( 30210, uint256S("0x0000000007bbde5f5e303d56243ace4ea56aee675ac062482f8bf6d337e36af3"))
+            ( 35310, uint256S("0x0000000002d50272b2453cfca9fcc4c2758ea36d836058dd7b8b35e92ea69dfd"))
+            ( 45200, uint256S("0x000000002f62c78349bf2559eef189de6d3fe0f0562e1e5987a63bd6277912fc"))
+            ( 50210, uint256S("0x000000001dd8ddadd2895564678aff6a30196b3b289e58bed9ae71bd74b2827e"))
+            ( 55300, uint256S("0x00000000045d042836cf9555a1da3e8d3d5d0267f300302c2f9dcb04f0f68f0c"))
+            ( 65102, uint256S("0x000000001f7eaa3f6300d22652423bdf7af998cdf690ea6689f6ed7dbb0dc6b4"))
+            ( 70410, uint256S("0x0000000006f713e5cf980bb48a4f1c4b2e88f23a2ddc129fd4469021eb853bd4"))
+            ( 75400, uint256S("0x000000002d7880c81b20ac68f39c3e497bfc2d320ebafb80e3aca0fccce6f8c6"))
+            ( 85500, uint256S("0x0000000002e8f3d9f7df152356cb79438bec9a82424e9ad7b844abfeddcbe1d1"))
+            ( 90143, uint256S("0x000000001894c675dd24e628a49cf2be2c421700215fdd11a4c591ccbebf25f5"))
+            ( 95220, uint256S("0x00000000011467c5b7dddb3956bf610f3696ba0780a9a97cbd4c12771e0b8238"))
+            ( 101310, uint256S("0x000000000889d88582e8a0d19cba6e89200e41ff73b2c86ef552951c6f4ac610"))
+            ( 105023, uint256S("0x000000002d74e8825387a89b6074e4539c7a48c86761ae311f19c52721f2126e")),
+            1531561318, // * UNIX timestamp of last checkpoint block
+            154266,       // * total number of transactions between genesis and last checkpoint
                         //   (the tx=... number in the SetBestChain debug.log lines)
-            500 // * estimated number of transactions per day after checkpoint
+            4800 // * estimated number of transactions per day after checkpoint
         };
     }
 };
