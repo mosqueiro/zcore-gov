@@ -1,3 +1,18 @@
+.Trash-1000/*
+
+build-w32_db48.sh
+build-w32.sh
+dependencies.sh
+zcore_daemon_db48.sh
+zcore_daemon.sh
+zcore_gui_db48.sh
+zcore_gui_osx.sh
+object_script.zcore-qt.Debug
+object_script.zcore-qt.Release
+#fix-xcb-include-order.patch
+#mingw-uuidof.patch
+#pidlist_absolute.patch
+
 *.sublime-project
 *.sublime-workspace
 todo.txt
@@ -41,7 +56,7 @@ src/config/stamp-h1
 share/setup.nsi
 share/qt/Info.plist
 
-src/univalue/gen
+#src/univalue/gen
 
 src/qt/*.moc
 src/qt/moc_*.cpp
@@ -61,7 +76,7 @@ libconftest.dylib*
 *.pyc
 *.o
 *.o-*
-*.patch
+#*.patch
 .zcore
 *.a
 *.pb.cc
@@ -80,7 +95,7 @@ libconftest.dylib*
 
 # Compilation and Qt preprocessor part
 *.qm
-Makefile
+#Makefile
 zcore-qt
 zcore-Qt.app
 
@@ -135,3 +150,4 @@ make
 GenesisH0/
 genesis/
 src/sedTU4GTf
+zcore-install-dmg/

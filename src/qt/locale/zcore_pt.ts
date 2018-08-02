@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
-        <translation>Copiar o endereço seleccionado para a área de transferência</translation>
+        <translation>Copiar o endereço selecionado para a área de transferência</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Delete the currently selected address from the list</source>
-        <translation>Apagar o endereço seleccionado</translation>
+        <translation>Apagar o endereço selecionado</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Export the data in the current tab to a file</source>
-        <translation>Exportar os dados do separador actual para um ficheiro</translation>
+        <translation>Exportar os dados do separador actual para um arquivo</translation>
     </message>
     <message>
         <source>&amp;Export</source>
@@ -87,7 +87,7 @@
     </message>
     <message>
         <source>Comma separated file (*.csv)</source>
-        <translation>Ficheiro separado por vírgulas (*.csv)</translation>
+        <translation>Arquivo separado por vírgulas (*.csv)</translation>
     </message>
     <message>
         <source>Exporting Failed</source>
@@ -133,7 +133,7 @@
     </message>
     <message>
         <source>Serves to disable the trivial sendmoney when OS account compromised. Provides no real security.</source>
-        <translation>Serve para desactivar o envio de dinheiro quando a conta do SO for comprometida. Não oferece segurança real.</translation>
+        <translation>Serve para desativar o envio de dinheiro quando a conta do SO for comprometida. Não oferece segurança real.</translation>
     </message>
     <message>
         <source>For anonymization only</source>
@@ -145,7 +145,7 @@
     </message>
     <message>
         <source>Encrypt wallet</source>
-        <translation>Cifrar carteira</translation>
+        <translation>Criptografar carteira</translation>
     </message>
     <message>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
@@ -157,11 +157,11 @@
     </message>
     <message>
         <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Esta operação necessita da sua palavra-passe para decifrar a carteira.</translation>
+        <translation>Esta operação necessita da sua palavra-passe para decriptografar a carteira.</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
-        <translation>Decifrar carteira</translation>
+        <translation>Decriptografar carteira</translation>
     </message>
     <message>
         <source>Change passphrase</source>
@@ -177,11 +177,11 @@
     </message>
     <message>
         <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR ZCR&lt;/b&gt;!</source>
-        <translation>Atenção: Se cifrar a carteira e perder a palavra-passe, irá &lt;b&gt;PERDER TODAS AS SUAS MOEDAS ZCR&lt;/b&gt;!</translation>
+        <translation>Atenção: Se criptografar a carteira e perder a palavra-passe, irá &lt;b&gt;PERDER TODAS AS SUAS MOEDAS ZCR&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
-        <translation>Tem a certeza que quer cifrar a carteira?</translation>
+        <translation>Tem a certeza que quer criptografar a carteira?</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
@@ -189,11 +189,11 @@
     </message>
     <message>
         <source>ZCore will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your zcores from being stolen by malware infecting your computer.</source>
-        <translation>O cliente ZCore irá fechar para finalizar o processo de cifra. Lembre-se que cifrar a sua carteira não consegue proteger totalmente as suas zcores contra roubos feitos por malware presente no seu computador.</translation>
+        <translation>O cliente ZCore irá fechar para finalizar o processo de cifra. Lembre-se que criptografar a sua carteira não consegue proteger totalmente as suas zcores contra roubos feitos por malware presente no seu computador.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
-        <translation>IMPORTANTE: Quaisquer copias de segurança feitas anteriormente à sua carteira, devem ser substituídas pelo novo ficheiro cifrado. Por razões de segurança, as copias de segurança anteriores não cifradas ficarão obsoletas assim que comece a usar a nova carteira cifrada,</translation>
+        <translation>IMPORTANTE: Quaisquer copias de segurança feitas anteriormente à sua carteira, devem ser substituídas pelo novo arquivo cifrado. Por razões de segurança, as copias de segurança anteriores não cifradas ficarão obsoletas assim que comece a usar a nova carteira cifrada,</translation>
     </message>
     <message>
         <source>Wallet encryption failed</source>
@@ -213,7 +213,7 @@
     </message>
     <message>
         <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>A palavra-passe fornecida para decifrar a carteira está incorrecta.</translation>
+        <translation>A palavra-passe fornecida para decriptografar a carteira está incorrecta.</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
@@ -231,6 +231,18 @@
 <context>
     <name>BitcoinGUI</name>
     <message>
+        <source>Open Wallet &amp;Configuration File</source>
+        <translation>Abrir arquivo de configuração da Wallet</translation>
+    </message>
+    <message>
+        <source>Open &amp;Masternode Configuration File</source>
+        <translation>Abrir arquivo de configuração dos Masternodes</translation>
+    </message>
+    <message>
+        <source>Open Masternode configuration file</source>
+        <translation>Abrir arquivo de configuração dos Masternodes</translation>
+    </message>    
+    <message>
         <source>ZCore</source>
         <translation>ZCore</translation>
     </message>
@@ -244,7 +256,7 @@
     </message>
     <message>
         <source>&amp;Overview</source>
-        <translation>&amp;Global</translation>
+        <translation>&amp;Principal</translation>
     </message>
     <message>
         <source>Show general overview of wallet</source>
@@ -284,7 +296,7 @@
     </message>
     <message>
         <source>&amp;About ZCore</source>
-        <translation>&amp;Acerca do ZCore</translation>
+        <translation>&amp;Sobre ZCore</translation>
     </message>
     <message>
         <source>Show information about ZCore</source>
@@ -292,7 +304,7 @@
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation>Acerca do &amp;Qt</translation>
+        <translation>Sobre o &amp;Qt</translation>
     </message>
     <message>
         <source>Show information about Qt</source>
@@ -308,7 +320,7 @@
     </message>
     <message>
         <source>&amp;Show / Hide</source>
-        <translation>&amp;Mostar / Esconder</translation>
+        <translation>&amp;Exibir / Ocultar</translation>
     </message>
     <message>
         <source>Show or hide the main Window</source>
@@ -316,7 +328,7 @@
     </message>
     <message>
         <source>&amp;Encrypt Wallet...</source>
-        <translation>&amp;Cifrar Carteira</translation>
+        <translation>&amp;Criptografar Carteira</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
@@ -376,11 +388,11 @@
     </message>
     <message>
         <source>&amp;Debug console</source>
-        <translation>Consola de &amp;Depuração</translation>
+        <translation>Console de &amp;Depuração</translation>
     </message>
     <message>
         <source>Open debugging console</source>
-        <translation>Abrir consola de depuração</translation>
+        <translation>Abrir console de depuração</translation>
     </message>
     <message>
         <source>&amp;Network Monitor</source>
@@ -408,15 +420,15 @@
     </message>
     <message>
         <source>Open &amp;Configuration File</source>
-        <translation>Abrir Ficheiro de &amp;Configuração</translation>
+        <translation>Abrir Arquivo de &amp;Configuração</translation>
     </message>
     <message>
         <source>Open configuration file</source>
-        <translation>Abrir ficheiro de configuração</translation>
+        <translation>Abrir arquivo de configuração</translation>
     </message>
     <message>
         <source>Show Automatic &amp;Backups</source>
-        <translation>Mostrar &amp;Cópias Automáticas</translation>
+        <translation>Mostrar &amp;Backups Automáticos</translation>
     </message>
     <message>
         <source>Show automatically created wallet backups</source>
@@ -464,11 +476,11 @@
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Ficheiro</translation>
+        <translation>&amp;Arquivo</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation>&amp;Definições</translation>
+        <translation>&amp;Configurações</translation>
     </message>
     <message>
         <source>&amp;Tools</source>
@@ -488,11 +500,11 @@
     </message>
     <message>
         <source>Synchronizing with network...</source>
-        <translation>A sincronizar com a rede...</translation>
+        <translation>Sincronizando com a rede...</translation>
     </message>
     <message>
         <source>Importing blocks from disk...</source>
-        <translation>A carregar blocos do disco...</translation>
+        <translation>Carregando blocos do disco...</translation>
     </message>
     <message>
         <source>Reindexing blocks on disk...</source>
@@ -638,7 +650,7 @@ Endereço: %4
     </message>
     <message>
         <source>(un)select all</source>
-        <translation>(des)seleccionar todos</translation>
+        <translation>(des)selecionar todos</translation>
     </message>
     <message>
         <source>Tree mode</source>
@@ -738,7 +750,7 @@ Endereço: %4
     </message>
     <message>
         <source>Non-anonymized input selected. &lt;b&gt;Darksend will be disabled.&lt;/b&gt;&lt;br&gt;&lt;br&gt;If you still want to use Darksend, please deselect all non-nonymized inputs first and then check Darksend checkbox again.</source>
-        <translation>Entrada não anonimizada seleccionada. &lt;b&gt;O Darksend será desactivado.&lt;/b&gt;&lt;br&gt;&lt;br&gt;Se deseja usar o Darksend, por favor desseleccione primeiro todas as entradas não anonimizadas e em seguida volte a marcar a opção Darksend.</translation>
+        <translation>Entrada não anonimizada selecionada. &lt;b&gt;O Darksend será desactivado.&lt;/b&gt;&lt;br&gt;&lt;br&gt;Se deseja usar o Darksend, por favor desselecione primeiro todas as entradas não anonimizadas e em seguida volte a marcar a opção Darksend.</translation>
     </message>
     <message>
         <source>highest</source>
@@ -857,7 +869,7 @@ Endereço: %4
     </message>
     <message>
         <source>Please select a privacy level.</source>
-        <translation>Por favor seleccione um nível de privacidade.</translation>
+        <translation>Por favor selecione um nível de privacidade.</translation>
     </message>
     <message>
         <source>Use 2 separate masternodes to mix funds up to 1000 ZCR</source>
@@ -998,7 +1010,7 @@ Endereço: %4
     </message>
     <message>
         <source>About ZCore</source>
-        <translation>Acerca do ZCore</translation>
+        <translation>Sobre ZCore</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -1092,7 +1104,7 @@ Endereço: %4
     </message>
     <message>
         <source>Open payment request from URI or file</source>
-        <translation>Abrir solicitação de pagamento a partir de um URI ou ficheiro</translation>
+        <translation>Abrir solicitação de pagamento a partir de um URI ou arquivo</translation>
     </message>
     <message>
         <source>URI:</source>
@@ -1100,11 +1112,11 @@ Endereço: %4
     </message>
     <message>
         <source>Select payment request file</source>
-        <translation>Seleccionar ficheiro de solicitação de pagamento</translation>
+        <translation>Selecionar arquivo de solicitação de pagamento</translation>
     </message>
     <message>
         <source>Select payment request file to open</source>
-        <translation>Seleccionar ficheiro de solicitação de pagamento para abrir</translation>
+        <translation>Selecionar arquivo de solicitação de pagamento para abrir</translation>
     </message>
 </context>
 <context>
@@ -1239,7 +1251,7 @@ Endereço: %4
     </message>
     <message>
         <source>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Quit in the menu.</source>
-        <translation>Minimizar em vez de fechar ao sair da aplicação. Quando esta opção está activada, a aplicação só será fechada quando seleccionar Sair no menu. </translation>
+        <translation>Minimizar em vez de fechar ao sair da aplicação. Quando esta opção está activada, a aplicação só será fechada quando selecionar Sair no menu. </translation>
     </message>
     <message>
         <source>M&amp;inimize on close</source>
@@ -1339,6 +1351,18 @@ https://www.transifex.com/projects/p/zcore/</translation>
 <context>
     <name>OverviewPage</name>
     <message>
+        <source>Start Mixing</source>
+        <translation>Iniciar Mistura</translation>
+    </message>
+    <message>
+        <source>Stop Mixing</source>
+        <translation>Parar Mistura</translation>
+    </message>
+    <message>
+        <source>Misturado</source>
+        <translation>Mixado</translation>
+    </message>    
+    <message>
         <source>Form</source>
         <translation>De</translation>
     </message>
@@ -1412,7 +1436,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Enabled/Disabled</source>
-        <translation>Activado/Desactivado</translation>
+        <translation>Ativado/Desativado</translation>
     </message>
     <message>
         <source>Completion:</source>
@@ -1480,7 +1504,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Disabled</source>
-        <translation>Desactivado</translation>
+        <translation>Desativado</translation>
     </message>
     <message>
         <source>Start Darksend Mixing</source>
@@ -1528,7 +1552,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Enabled</source>
-        <translation>Activado</translation>
+        <translation>Ativado</translation>
     </message>
     <message>
         <source>Last Darksend message:
@@ -1546,7 +1570,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>If you don't want to see internal Darksend fees/transactions select "Most Common" as Type on the "Transactions" tab.</source>
-        <translation>Se não deseja visualizar as taxas/transações internas Darksend seleccione "Mais Comuns" como Tipo no separador "Transações"</translation>
+        <translation>Se não deseja visualizar as taxas/transações internas Darksend selecione "Mais Comuns" como Tipo no separador "Transações"</translation>
     </message>
     <message>
         <source>Darksend requires at least %1 to use.</source>
@@ -1554,7 +1578,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Wallet is locked and user declined to unlock. Disabling Darksend.</source>
-        <translation>A carteira está bloqueada e o utilizador recusou o desbloqueamento. A desactivar Darksend.</translation>
+        <translation>A carteira está bloqueada e o utilizador recusou o desbloqueamento. A desativar Darksend.</translation>
     </message>
 </context>
 <context>
@@ -1577,7 +1601,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
-        <translation>Manipulação de ficheiros de solicitação de pagamento</translation>
+        <translation>Manipulação de arquivos de solicitação de pagamento</translation>
     </message>
     <message>
         <source>Invalid payment address %1</source>
@@ -1589,7 +1613,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>O ficheiro de solicitação de pagamento não pode ser aberto ou processado! Isto pode ser causado por um ficheiro de solicitação de pagamento inválido.</translation>
+        <translation>O arquivo de solicitação de pagamento não pode ser aberto ou processado! Isto pode ser causado por um arquivo de solicitação de pagamento inválido.</translation>
     </message>
     <message>
         <source>Payment request rejected</source>
@@ -1761,7 +1785,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Open the ZCore debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Abrir o ficheiro de registo de depuração ZCore a partir da pasta de dados actual. Para grandes ficheiros de registo pode demorar alguns segundos.</translation>
+        <translation>Abrir o arquivo de registo de depuração ZCore a partir da pasta de dados actual. Para grandes arquivos de registo pode demorar alguns segundos.</translation>
     </message>
     <message>
         <source>&amp;Open</source>
@@ -1781,7 +1805,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Debug log file</source>
-        <translation>Ficheiro de registo de depuração</translation>
+        <translation>Arquivo de registo de depuração</translation>
     </message>
     <message>
         <source>Using OpenSSL version</source>
@@ -1813,11 +1837,11 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>&amp;Console</source>
-        <translation>&amp;Consola</translation>
+        <translation>&amp;Console</translation>
     </message>
     <message>
         <source>Clear console</source>
-        <translation>Limpar consola</translation>
+        <translation>Limpar console</translation>
     </message>
     <message>
         <source>&amp;Network Traffic</source>
@@ -1909,7 +1933,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Rescan blockchain files</source>
-        <translation>Reprocessar ficheiros da cadeia de blocos</translation>
+        <translation>Reprocessar arquivos da cadeia de blocos</translation>
     </message>
     <message>
         <source>Recover transactions 1</source>
@@ -1929,7 +1953,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>-salvagewallet: Attempt to recover private keys from a corrupt wallet.dat.</source>
-        <translation>-salvagewallet: Tenta recuperar as chaves privadas a partir de um ficheiro wallet.dat corrompido.</translation>
+        <translation>-salvagewallet: Tenta recuperar as chaves privadas a partir de um arquivo wallet.dat corrompido.</translation>
     </message>
     <message>
         <source>-rescan: Rescan the block chain for missing wallet transactions.</source>
@@ -1957,7 +1981,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>-reindex: Rebuild block chain index from current blk000??.dat files.</source>
-        <translation>-reindex: Reconstroi o índice da cadeia de blocos a partir dos ficheiros actuais blk000??.dat.</translation>
+        <translation>-reindex: Reconstroi o índice da cadeia de blocos a partir dos arquivos actuais blk000??.dat.</translation>
     </message>
     <message>
         <source>In:</source>
@@ -1969,7 +1993,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Welcome to the ZCore RPC console.</source>
-        <translation>Bem-vindo à consola RPC ZCore</translation>
+        <translation>Bem-vindo à console RPC ZCore</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
@@ -2080,7 +2104,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Show the selected request (does the same as double clicking an entry)</source>
-        <translation>Mostrar a solicitação seleccionada (igual a clicar duas vezes)</translation>
+        <translation>Mostrar a solicitação selecionada (igual a clicar duas vezes)</translation>
     </message>
     <message>
         <source>Show</source>
@@ -2088,7 +2112,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Remove the selected entries from the list</source>
-        <translation>Remover as entradas seleccionadas da lista</translation>
+        <translation>Remover as entradas selecionadas da lista</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -2201,7 +2225,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Coin Control Features</source>
-        <translation>Funcionalidades de Coin Control</translation>
+        <translation>Funcionalidades do Controle da Moeda</translation>
     </message>
     <message>
         <source>Inputs...</source>
@@ -2209,7 +2233,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>automatically selected</source>
-        <translation>seleccionadas automáticamente</translation>
+        <translation>selecionadas automáticamente</translation>
     </message>
     <message>
         <source>Insufficient funds!</source>
@@ -2469,7 +2493,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</source>
-        <translation>A transação foi rejeitada! Isto pode acontecer se algumas das moedas da sua carteira tiverem sido gastas, tal como se usou uma copia do ficheiro wallet.dat e moedas tiverem sido gastas nessa cópia mas não aqui.</translation>
+        <translation>A transação foi rejeitada! Isto pode acontecer se algumas das moedas da sua carteira tiverem sido gastas, tal como se usou uma copia do arquivo wallet.dat e moedas tiverem sido gastas nessa cópia mas não aqui.</translation>
     </message>
     <message>
         <source>Error: The wallet was unlocked only to anonymize coins.</source>
@@ -2571,7 +2595,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     <name>ShutdownWindow</name>
     <message>
         <source>ZCore is shutting down...</source>
-        <translation>O ZCore está a desligar...</translation>
+        <translation>ZCore está desligando...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>
@@ -2729,7 +2753,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>The Bitcoin Core developers</source>
-        <translation>Os programadores Bitcoin Core</translation>
+        <translation>Bitcoin Core</translation>
     </message>
     <message>
         <source>The ZCore developers</source>
@@ -3017,7 +3041,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Mined</source>
-        <translation>Minado</translation>
+        <translation>Minerado</translation>
     </message>
     <message>
         <source>Darksend Denominate</source>
@@ -3140,7 +3164,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Mined</source>
-        <translation>Minado</translation>
+        <translation>Minerado</translation>
     </message>
     <message>
         <source>Other</source>
@@ -3184,7 +3208,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Comma separated file (*.csv)</source>
-        <translation>Ficheiro separado por vírgulas (*.csv)</translation>
+        <translation>Arquivo separado por vírgulas (*.csv)</translation>
     </message>
     <message>
         <source>Confirmed</source>
@@ -3243,7 +3267,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     <name>UnitDisplayStatusBarControl</name>
     <message>
         <source>Unit to show amounts in. Click to select another unit.</source>
-        <translation>Unidade das quantias. Clique para seleccionar outra unidade.</translation>
+        <translation>Unidade das quantias. Clique para selecionar outra unidade.</translation>
     </message>
 </context>
 <context>
@@ -3272,11 +3296,11 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Export the data in the current tab to a file</source>
-        <translation>Exportar os dados do separador actual para um ficheiro</translation>
+        <translation>Exportar os dados do separador actual para um arquivo</translation>
     </message>
     <message>
         <source>Selected amount:</source>
-        <translation>Quantia seleccionada: </translation>
+        <translation>Quantia selecionada: </translation>
     </message>
     <message>
         <source>Backup Wallet</source>
@@ -3427,7 +3451,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Attempt to recover private keys from a corrupt wallet.dat</source>
-        <translation>Tentar recuperar as chaves privadas a partir de um ficheiro wallet.dat corrompido</translation>
+        <translation>Tentar recuperar as chaves privadas a partir de um arquivo wallet.dat corrompido</translation>
     </message>
     <message>
         <source>Block creation options:</source>
@@ -3623,7 +3647,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Send trace/debug info to console instead of debug.log file (default: %u)</source>
-        <translation>Enviar informação de execução/depuração para a consola em vez de enviar para o ficheiro debug.log (omissão: %u)</translation>
+        <translation>Enviar informação de execução/depuração para a console em vez de enviar para o arquivo debug.log (omissão: %u)</translation>
     </message>
     <message>
         <source>Set the number of threads for coin generation if enabled (-1 = all cores, default: %d)</source>
@@ -3717,7 +3741,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Disable safemode, override a real safe mode event (default: %u)</source>
-        <translation>Desactivar safemode, ultrapassar o evento de modo de segurança real (default: %u)</translation>
+        <translation>Desativar safemode, ultrapassar o evento de modo de segurança real (default: %u)</translation>
     </message>
     <message>
         <source>Enable the client to act as a masternode (0-1, default: %u)</source>
@@ -3737,7 +3761,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Error: Can't select current denominated inputs</source>
-        <translation>Erro: Incapaz de seleccionar inputs denominados correntes</translation>
+        <translation>Erro: Incapaz de selecionar inputs denominados correntes</translation>
     </message>
     <message>
         <source>Error: Unsupported argument -tor found, use -onion.</source>
@@ -3777,7 +3801,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Imports blocks from external blk000??.dat file</source>
-        <translation>Importa blocos a partir de ficheiros blk000??.dat externos</translation>
+        <translation>Importa blocos a partir de arquivos blk000??.dat externos</translation>
     </message>
     <message>
         <source>Include IP addresses in debug output (default: %u)</source>
@@ -3865,7 +3889,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Loading masternode cache...</source>
-        <translation>A carregar a cache de masternodes...</translation>
+        <translation>Carregando cache de masternodes...</translation>
     </message>
     <message>
         <source>Loading masternode payment cache...</source>
@@ -3877,7 +3901,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Lock masternodes from masternode configuration file (default: %u)</source>
-        <translation>Bloquear masternode presentes no ficheiro de configuração (omissão: %u)</translation>
+        <translation>Bloquear masternode presentes no arquivo de configuração (omissão: %u)</translation>
     </message>
     <message>
         <source>Maintain at most &lt;n&gt; connections to peers (default: %u)</source>
@@ -3933,7 +3957,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Send trace/debug info to debug.log file (default: %u)</source>
-        <translation>Enviar informação de execução/depuração para o ficheiro debug.log (omissão: %u)</translation>
+        <translation>Enviar informação de execução/depuração para o arquivo debug.log (omissão: %u)</translation>
     </message>
     <message>
         <source>Send transactions as zero-fee transactions if possible (default: %u)</source>
@@ -3941,7 +3965,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Server certificate file (default: %s)</source>
-        <translation>Ficheiro de certificado do servidor (omissão: %s)</translation>
+        <translation>Arquivo de certificado do servidor (omissão: %s)</translation>
     </message>
     <message>
         <source>Server private key (default: %s)</source>
@@ -3973,7 +3997,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Specify configuration file (default: %s)</source>
-        <translation>Especificar ficheiro de configuração (default: %s)</translation>
+        <translation>Especificar arquivo de configuração (default: %s)</translation>
     </message>
     <message>
         <source>Specify connection timeout in milliseconds (minimum: 1, default: %d)</source>
@@ -3981,11 +4005,11 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Specify masternode configuration file (default: %s)</source>
-        <translation>Especificar ficheiro de configuração masternode (default: %s)</translation>
+        <translation>Especificar arquivo de configuração masternode (default: %s)</translation>
     </message>
     <message>
         <source>Specify pid file (default: %s)</source>
-        <translation>Especificar ficheiro pid (default: %s)</translation>
+        <translation>Especificar arquivo pid (default: %s)</translation>
     </message>
     <message>
         <source>Spend unconfirmed change when sending transactions (default: %u)</source>
@@ -4009,19 +4033,19 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Synchronizing budgets...</source>
-        <translation>A sincronizar orçamentos...</translation>
+        <translation>Sincronizando orçamentos...</translation>
     </message>
     <message>
         <source>Synchronizing masternode winners...</source>
-        <translation>A sincronizar masternodes vencedores...</translation>
+        <translation>Sincronizando masternodes vencedores...</translation>
     </message>
     <message>
         <source>Synchronizing masternodes...</source>
-        <translation>A sincronizar masternodes...</translation>
+        <translation>Sincronizando masternodes...</translation>
     </message>
     <message>
         <source>Synchronizing sporks...</source>
-        <translation>A sincronizar sporks...</translation>
+        <translation>Sincronizando sporks...</translation>
     </message>
     <message>
         <source>This is not a Masternode.</source>
@@ -4121,19 +4145,19 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Loading addresses...</source>
-        <translation>A carregar endereços...</translation>
+        <translation>Carregando endereços...</translation>
     </message>
     <message>
         <source>Loading block index...</source>
-        <translation>A carregar índice de blocos...</translation>
+        <translation>Carregando índice de blocos...</translation>
     </message>
     <message>
         <source>Loading wallet... (%3.2f %%)</source>
-        <translation>A carregar carteira... (%3.2f %%)</translation>
+        <translation>Carregando carteira... (%3.2f %%)</translation>
     </message>
     <message>
         <source>Loading wallet...</source>
-        <translation>A carregar carteira...</translation>
+        <translation>Carregando carteira...</translation>
     </message>
     <message>
         <source>Masternode options:</source>
@@ -4173,7 +4197,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Not enough file descriptors available.</source>
-        <translation>Número insuficiente de descritores de ficheiros disponíveis.</translation>
+        <translation>Número insuficiente de descritores de arquivos disponíveis.</translation>
     </message>
     <message>
         <source>Options:</source>
@@ -4205,7 +4229,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Rebuild block chain index from current blk000??.dat files</source>
-        <translation>Reconstruir o índice da cadeia de blocos a partir dos ficheiros actuais blk000??.dat</translation>
+        <translation>Reconstruir o índice da cadeia de blocos a partir dos arquivos actuais blk000??.dat</translation>
     </message>
     <message>
         <source>Receive and display P2P network alerts (default: %u)</source>
@@ -4257,7 +4281,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Shrink debug.log file on client startup (default: 1 when no -debug)</source>
-        <translation>Diminuir o ficheiro debug.log ao iniciar o cliente (omissão: 1 quando não usa opção -debug)</translation>
+        <translation>Diminuir o arquivo debug.log ao iniciar o cliente (omissão: 1 quando não usa opção -debug)</translation>
     </message>
     <message>
         <source>Signing failed.</source>
@@ -4273,7 +4297,7 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Specify wallet file (within data directory)</source>
-        <translation>Especificar o ficheiro da carteira (dentro da pasta de dados)</translation>
+        <translation>Especificar o arquivo da carteira (dentro da pasta de dados)</translation>
     </message>
     <message>
         <source>Specify your own public address</source>
@@ -4365,11 +4389,11 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <source>Verifying blocks...</source>
-        <translation>A verificar blocos...</translation>
+        <translation>Verificando blocos...</translation>
     </message>
     <message>
         <source>Verifying wallet...</source>
-        <translation>A verificar carteira...</translation>
+        <translation>Verificando carteira...</translation>
     </message>
     <message>
         <source>Wallet %s resides outside data directory %s</source>

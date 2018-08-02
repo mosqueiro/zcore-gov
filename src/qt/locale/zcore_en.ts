@@ -5126,13 +5126,13 @@ https://www.transifex.com/projects/p/zcore/</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
-        <translation>Copyright (C) 2009-%i The Bitcoin Core Developers</translation>
+        <source>Copyright (C) 2009-%i Bitcoin Core</source>
+        <translation>Copyright (C) 2009-%i Bitcoin Core</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>Copyright (C) 2014-%i The ZCore Developers</source>
-        <translation>Copyright (C) 2014-%i The ZCore Developers</translation>
+        <source>Copyright (C) 2014-%i ZCore</source>
+        <translation>Copyright (C) 2014-%i ZCore</translation>
     </message>
     <message>
         <location line="+14"/>
