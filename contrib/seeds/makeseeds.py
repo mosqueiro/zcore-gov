@@ -159,11 +159,6 @@ def main():
     # Sort the results by IP address (for deterministic output).
     ips.sort(key=lambda x: (x['net'], x['sortkey']))
 
-    for ip in ips:
-        if ip['net'] == 'ipv6':
-            print '[%s]:%i' % (ip['ip'], ip['port'])
-        else:
-            print '%s:%i' % (ip['ip'], ip['port'])
 
 if __name__ == '__main__':
     main()
