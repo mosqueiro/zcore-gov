@@ -19,7 +19,7 @@ sudo curl -o- https://raw.githubusercontent.com/zcore-coin/zcore-source/master/i
 License
 -------
 
-XCore is released under the terms of the MIT license. See [COPYING](COPYING) for more
+ZCore is released under the terms of the MIT license. See [COPYING](COPYING) for more
 information or see https://opensource.org/licenses/MIT.
 
 Development Process
@@ -30,3 +30,6 @@ completely stable. [Tags](https://github.com/zcore-coin/zcore-source/tags) are c
 regularly to indicate new official, stable release versions of ZCore.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
+
+
+ <a href="https://twitter.com/intent/follow?screen_name=ZCoreCrypto"><img src="https://img.shields.io/twitter/follow/ZCoreCrypto.svg?style=social&logo=twitter" alt="follow on Twitter"></a>
