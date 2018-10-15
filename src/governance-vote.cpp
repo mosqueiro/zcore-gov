@@ -5,6 +5,9 @@
 #include "darksend.h"
 #include "governance-vote.h"
 #include "masternodeman.h"
+#include "masternode-sync.h"
+#include "messagesigner.h"
+
 #include "util.h"
 
 #include <boost/lexical_cast.hpp>
@@ -225,6 +228,10 @@ CGovernanceVote::CGovernanceVote(CTxIn vinMasternodeIn, uint256 nParentHashIn, v
 
 void CGovernanceVote::Relay() const
 {
+    if(!masternodeSync.IsSynced()) {
+        LogPrint("gobject", "CGovernanceVote::Relay -- won't relay until fully synced\n");
+        return;
+    }
     CInv inv(MSG_GOVERNANCE_OBJECT_VOTE, GetHash());
     RelayInv(inv, PROTOCOL_VERSION);
 }
@@ -239,12 +246,12 @@ bool CGovernanceVote::Sign(CKey& keyMasternode, CPubKey& pubKeyMasternode)
     std::string strMessage = vinMasternode.prevout.ToStringShort() + "|" + nParentHash.ToString() + "|" +
         boost::lexical_cast<std::string>(nVoteSignal) + "|" + boost::lexical_cast<std::string>(nVoteOutcome) + "|" + boost::lexical_cast<std::string>(nTime);
 
-    if(!darkSendSigner.SignMessage(strMessage, vchSig, keyMasternode)) {
+    if(!CMessageSigner::SignMessage(strMessage, vchSig, keyMasternode)) {
         LogPrintf("CGovernanceVote::Sign -- SignMessage() failed\n");
         return false;
     }
 
-    if(!darkSendSigner.VerifyMessage(pubKeyMasternode, vchSig, strMessage, strError)) {
+    if(!CMessageSigner::VerifyMessage(pubKeyMasternode, vchSig, strMessage, strError)) {
         LogPrintf("CGovernanceVote::Sign -- VerifyMessage() failed, error: %s\n", strError);
         return false;
     }
@@ -254,7 +261,7 @@ bool CGovernanceVote::Sign(CKey& keyMasternode, CPubKey& pubKeyMasternode)
 
 bool CGovernanceVote::IsValid(bool fSignatureCheck) const
 {
-    if(nTime > GetTime() + (60*60)) {
+    if(nTime > GetAdjustedTime() + (60*60)) {
         LogPrint("gobject", "CGovernanceVote::IsValid -- vote is too far ahead of current time - %s - nTime %lli - Max Time %lli\n", GetHash().ToString(), nTime, GetTime() + (60*60));
         return false;
     }
@@ -285,7 +292,7 @@ bool CGovernanceVote::IsValid(bool fSignatureCheck) const
     std::string strMessage = vinMasternode.prevout.ToStringShort() + "|" + nParentHash.ToString() + "|" +
         boost::lexical_cast<std::string>(nVoteSignal) + "|" + boost::lexical_cast<std::string>(nVoteOutcome) + "|" + boost::lexical_cast<std::string>(nTime);
 
-    if(!darkSendSigner.VerifyMessage(infoMn.pubKeyMasternode, vchSig, strMessage, strError)) {
+    if(!CMessageSigner::VerifyMessage(infoMn.pubKeyMasternode, vchSig, strMessage, strError)) {
         LogPrintf("CGovernanceVote::IsValid -- VerifyMessage() failed, error: %s\n", strError);
         return false;
     }

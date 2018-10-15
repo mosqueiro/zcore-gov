@@ -375,6 +375,8 @@ am_libbitcoin_server_a_OBJECTS =  \
 	libbitcoin_server_a-httpserver.$(OBJEXT) \
 	libbitcoin_server_a-init.$(OBJEXT) \
 	libbitcoin_server_a-dbwrapper.$(OBJEXT) \
+	libbitcoin_server_a-hash.$(OBJEXT) \
+	libbitcoin_server_a-messagesigner.$(OBJEXT) \
 	libbitcoin_server_a-governance.$(OBJEXT) \
 	libbitcoin_server_a-governance-classes.$(OBJEXT) \
 	libbitcoin_server_a-governance-object.$(OBJEXT) \
@@ -422,12 +424,12 @@ am__libbitcoin_util_a_SOURCES_DIST = support/pagelocker.cpp \
 	compat/endian.h compat/sanity.h compressor.h \
 	consensus/consensus.h consensus/merkle.h consensus/params.h \
 	consensus/validation.h core_io.h core_memusage.h darksend.h \
-	dsnotificationinterface.h darksend-relay.h governance.h \
-	governance-classes.h governance-exceptions.h \
-	governance-object.h governance-vote.h governance-votedb.h \
-	flat-database.h hash.h httprpc.h httpserver.h init.h \
-	instantx.h key.h keepass.h keystore.h dbwrapper.h limitedmap.h \
-	main.h masternode.h masternode-payments.h masternode-sync.h \
+	dsnotificationinterface.h darksend-relay.h flat-database.h \
+	hash.h messagesigner.h governance.h governance-classes.h \
+	governance-exceptions.h governance-object.h governance-vote.h \
+	governance-votedb.h httprpc.h httpserver.h init.h instantx.h \
+	key.h keepass.h keystore.h dbwrapper.h limitedmap.h main.h \
+	masternode.h masternode-payments.h masternode-sync.h \
 	masternodeman.h masternodeconfig.h memusage.h merkleblock.h \
 	miner.h net.h netbase.h netfulfilledman.h noui.h policy/fees.h \
 	policy/policy.h policy/rbf.h pow.h prevector.h \
@@ -1561,13 +1563,13 @@ am__relativize = \
     dir1=`echo "$$dir1" | sed -e "$$sed_rest"`; \
   done; \
   reldir="$$dir2"
-ACLOCAL = ${SHELL} /root/mdev/p-zcore/build-aux/missing aclocal-1.15
+ACLOCAL = ${SHELL} /root/proap/p-zcore/build-aux/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 0
 AR = /usr/bin/ar
-AUTOCONF = ${SHELL} /root/mdev/p-zcore/build-aux/missing autoconf
-AUTOHEADER = ${SHELL} /root/mdev/p-zcore/build-aux/missing autoheader
-AUTOMAKE = ${SHELL} /root/mdev/p-zcore/build-aux/missing automake-1.15
+AUTOCONF = ${SHELL} /root/proap/p-zcore/build-aux/missing autoconf
+AUTOHEADER = ${SHELL} /root/proap/p-zcore/build-aux/missing autoheader
+AUTOMAKE = ${SHELL} /root/proap/p-zcore/build-aux/missing automake-1.15
 AWK = gawk
 BDB_CPPFLAGS = 
 BDB_LIBS = -ldb_cxx-4.8
@@ -1595,8 +1597,8 @@ COPYRIGHT_YEAR = 2018
 CPP = gcc -E
 CPPFILT = /usr/bin/c++filt
 CPPFLAGS =  -DHAVE_BUILD_INFO -D__STDC_FORMAT_MACROS
-CRYPTO_CFLAGS = 
-CRYPTO_LIBS = -lcrypto
+CRYPTO_CFLAGS = -I/usr/local/include
+CRYPTO_LIBS = -L/usr/local/lib -lcrypto
 CXX = g++
 CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
@@ -1655,7 +1657,7 @@ LTLIBOBJS =
 LT_SYS_LIBRARY_PATH = 
 LUPDATE = 
 MAINT = 
-MAKEINFO = ${SHELL} /root/mdev/p-zcore/build-aux/missing makeinfo
+MAKEINFO = ${SHELL} /root/proap/p-zcore/build-aux/missing makeinfo
 MAKENSIS = 
 MANIFEST_TOOL = :
 MINIUPNPC_CPPFLAGS = 
@@ -1722,8 +1724,8 @@ RELDFLAGS =
 SED = /bin/sed
 SET_MAKE = 
 SHELL = /bin/bash
-SSL_CFLAGS = 
-SSL_LIBS = -lssl
+SSL_CFLAGS = -I/usr/local/include
+SSL_LIBS = -L/usr/local/lib -lssl
 STRIP = /usr/bin/strip
 TESTDEFS = 
 UIC = 
@@ -1737,10 +1739,10 @@ X11XCB_LIBS =
 XGETTEXT = /usr/bin/xgettext
 ZMQ_CFLAGS = 
 ZMQ_LIBS = -lzmq
-abs_builddir = /root/mdev/p-zcore/src
-abs_srcdir = /root/mdev/p-zcore/src
-abs_top_builddir = /root/mdev/p-zcore
-abs_top_srcdir = /root/mdev/p-zcore
+abs_builddir = /root/proap/p-zcore/src
+abs_srcdir = /root/proap/p-zcore/src
+abs_top_builddir = /root/proap/p-zcore
+abs_top_srcdir = /root/proap/p-zcore
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -1772,7 +1774,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /root/mdev/p-zcore/build-aux/install-sh
+install_sh = ${SHELL} /root/proap/p-zcore/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -1859,14 +1861,15 @@ BITCOIN_CORE_H = \
   darksend.h \
   dsnotificationinterface.h \
   darksend-relay.h \
+  flat-database.h \
+  hash.h \
+  messagesigner.h \
   governance.h \
   governance-classes.h \
   governance-exceptions.h \
   governance-object.h \
   governance-vote.h \
   governance-votedb.h \
-  flat-database.h \
-  hash.h \
   httprpc.h \
   httpserver.h \
   init.h \
@@ -1958,6 +1961,8 @@ libbitcoin_server_a_SOURCES = \
   httpserver.cpp \
   init.cpp \
   dbwrapper.cpp \
+  hash.cpp \
+  messagesigner.cpp \
   governance.cpp \
   governance-classes.cpp \
   governance-object.cpp \
@@ -3814,11 +3819,13 @@ include ./$(DEPDIR)/libbitcoin_server_a-governance-object.Po
 include ./$(DEPDIR)/libbitcoin_server_a-governance-vote.Po
 include ./$(DEPDIR)/libbitcoin_server_a-governance-votedb.Po
 include ./$(DEPDIR)/libbitcoin_server_a-governance.Po
+include ./$(DEPDIR)/libbitcoin_server_a-hash.Po
 include ./$(DEPDIR)/libbitcoin_server_a-httprpc.Po
 include ./$(DEPDIR)/libbitcoin_server_a-httpserver.Po
 include ./$(DEPDIR)/libbitcoin_server_a-init.Po
 include ./$(DEPDIR)/libbitcoin_server_a-main.Po
 include ./$(DEPDIR)/libbitcoin_server_a-merkleblock.Po
+include ./$(DEPDIR)/libbitcoin_server_a-messagesigner.Po
 include ./$(DEPDIR)/libbitcoin_server_a-miner.Po
 include ./$(DEPDIR)/libbitcoin_server_a-net.Po
 include ./$(DEPDIR)/libbitcoin_server_a-netfulfilledman.Po
@@ -5560,6 +5567,34 @@ libbitcoin_server_a-dbwrapper.obj: dbwrapper.cpp
 #	$(AM_V_CXX)source='dbwrapper.cpp' object='libbitcoin_server_a-dbwrapper.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_server_a-dbwrapper.obj `if test -f 'dbwrapper.cpp'; then $(CYGPATH_W) 'dbwrapper.cpp'; else $(CYGPATH_W) '$(srcdir)/dbwrapper.cpp'; fi`
+
+libbitcoin_server_a-hash.o: hash.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-hash.o -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-hash.Tpo -c -o libbitcoin_server_a-hash.o `test -f 'hash.cpp' || echo '$(srcdir)/'`hash.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_server_a-hash.Tpo $(DEPDIR)/libbitcoin_server_a-hash.Po
+#	$(AM_V_CXX)source='hash.cpp' object='libbitcoin_server_a-hash.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_server_a-hash.o `test -f 'hash.cpp' || echo '$(srcdir)/'`hash.cpp
+
+libbitcoin_server_a-hash.obj: hash.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-hash.obj -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-hash.Tpo -c -o libbitcoin_server_a-hash.obj `if test -f 'hash.cpp'; then $(CYGPATH_W) 'hash.cpp'; else $(CYGPATH_W) '$(srcdir)/hash.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_server_a-hash.Tpo $(DEPDIR)/libbitcoin_server_a-hash.Po
+#	$(AM_V_CXX)source='hash.cpp' object='libbitcoin_server_a-hash.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_server_a-hash.obj `if test -f 'hash.cpp'; then $(CYGPATH_W) 'hash.cpp'; else $(CYGPATH_W) '$(srcdir)/hash.cpp'; fi`
+
+libbitcoin_server_a-messagesigner.o: messagesigner.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-messagesigner.o -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-messagesigner.Tpo -c -o libbitcoin_server_a-messagesigner.o `test -f 'messagesigner.cpp' || echo '$(srcdir)/'`messagesigner.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_server_a-messagesigner.Tpo $(DEPDIR)/libbitcoin_server_a-messagesigner.Po
+#	$(AM_V_CXX)source='messagesigner.cpp' object='libbitcoin_server_a-messagesigner.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_server_a-messagesigner.o `test -f 'messagesigner.cpp' || echo '$(srcdir)/'`messagesigner.cpp
+
+libbitcoin_server_a-messagesigner.obj: messagesigner.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-messagesigner.obj -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-messagesigner.Tpo -c -o libbitcoin_server_a-messagesigner.obj `if test -f 'messagesigner.cpp'; then $(CYGPATH_W) 'messagesigner.cpp'; else $(CYGPATH_W) '$(srcdir)/messagesigner.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_server_a-messagesigner.Tpo $(DEPDIR)/libbitcoin_server_a-messagesigner.Po
+#	$(AM_V_CXX)source='messagesigner.cpp' object='libbitcoin_server_a-messagesigner.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_server_a-messagesigner.obj `if test -f 'messagesigner.cpp'; then $(CYGPATH_W) 'messagesigner.cpp'; else $(CYGPATH_W) '$(srcdir)/messagesigner.cpp'; fi`
 
 libbitcoin_server_a-governance.o: governance.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-governance.o -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-governance.Tpo -c -o libbitcoin_server_a-governance.o `test -f 'governance.cpp' || echo '$(srcdir)/'`governance.cpp
