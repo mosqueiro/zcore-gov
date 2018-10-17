@@ -9,6 +9,7 @@
 #include "governance-object.h"
 #include "governance-vote.h"
 #include "masternodeman.h"
+#include "messagesigner.h"
 #include "util.h"
 
 #include <univalue.h>
@@ -150,7 +151,7 @@ bool CGovernanceObject::ProcessVote(CNode* pfrom,
         return false;
     }
 
-    int64_t nNow = GetTime();
+    int64_t nNow = GetAdjustedTime();
     int64_t nVoteTimeUpdate = voteInstance.nTime;
     if(governance.AreRateChecksEnabled()) {
         int64_t nTimeDelta = nNow - voteInstance.nTime;
@@ -260,12 +261,12 @@ bool CGovernanceObject::Sign(CKey& keyMasternode, CPubKey& pubKeyMasternode)
 
     LOCK(cs);
 
-    if(!darkSendSigner.SignMessage(strMessage, vchSig, keyMasternode)) {
+    if(!CMessageSigner::SignMessage(strMessage, vchSig, keyMasternode)) {
         LogPrintf("CGovernanceObject::Sign -- SignMessage() failed\n");
         return false;
     }
 
-    if(!darkSendSigner.VerifyMessage(pubKeyMasternode, vchSig, strMessage, strError)) {
+    if(!CMessageSigner::VerifyMessage(pubKeyMasternode, vchSig, strMessage, strError)) {
         LogPrintf("CGovernanceObject::Sign -- VerifyMessage() failed, error: %s\n", strError);
         return false;
     }
@@ -284,7 +285,7 @@ bool CGovernanceObject::CheckSignature(CPubKey& pubKeyMasternode)
     std::string strMessage = GetSignatureMessage();
 
     LOCK(cs);
-    if(!darkSendSigner.VerifyMessage(pubKeyMasternode, vchSig, strMessage, strError)) {
+    if(!CMessageSigner::VerifyMessage(pubKeyMasternode, vchSig, strMessage, strError)) {
         LogPrintf("CGovernance::CheckSignature -- VerifyMessage() failed, error: %s\n", strError);
         return false;
     }
@@ -450,7 +451,7 @@ bool CGovernanceObject::IsValidLocally(std::string& strError, bool& fMissingMast
 
     switch(nObjectType) {
         case GOVERNANCE_OBJECT_PROPOSAL:
-        case GOVERNANCE_OBJECT_TRIGGER:
+        case GOVERNANCE_OBJECT_TRIGGER: 
         case GOVERNANCE_OBJECT_WATCHDOG:
             break;
         default:
