@@ -196,22 +196,7 @@ void CGovernanceTriggerManager::CleanAndRemove()
                 break;
             case SEEN_OBJECT_IS_VALID:
             case SEEN_OBJECT_EXECUTED:
-                {
-                    int nTriggerBlock = pSuperblock->GetBlockStart();
-                    // Rough approximation: a cycle of superblock ++
-                    int nExpirationBlock = nTriggerBlock + GOVERNANCE_TRIGGER_EXPIRATION_BLOCKS;
-                    LogPrint("gobject", "CGovernanceTriggerManager::CleanAndRemove -- nTriggerBlock = %d, nExpirationBlock = %d\n", nTriggerBlock, nExpirationBlock);
-                    if(governance.GetCachedBlockHeight() > nExpirationBlock) {
-                        LogPrint("gobject", "CGovernanceTriggerManager::CleanAndRemove -- Outdated trigger found\n");
-                        remove = true;
-                        CGovernanceObject* pgovobj = pSuperblock->GetGovernanceObject();
-                        if(pgovobj) {
-                            LogPrint("gobject", "CGovernanceTriggerManager::CleanAndRemove -- Expiring outdated object: %s\n", pgovobj->GetHash().ToString());
-                            pgovobj->fExpired = true;
-                            pgovobj->nDeletionTime = GetAdjustedTime();
-                        }
-                    }
-                }
+                remove = pSuperblock->IsExpired();
                 break;
             default:
                 break;
@@ -313,13 +298,13 @@ bool CSuperblockManager::IsSuperblockTriggered(int nBlockHeight)
 
         // note : 12.1 - is epoch calculation correct?
 
-        if(nBlockHeight != pSuperblock->GetBlockStart()) {
+        if(nBlockHeight != pSuperblock->GetBlockHeight()) {
             LogPrint("gobject", "CSuperblockManager::IsSuperblockTriggered -- block height doesn't match nBlockHeight = %d, blockStart = %d, continuing\n",
                      nBlockHeight,
-                     pSuperblock->GetBlockStart());
+                     pSuperblock->GetBlockHeight());
             DBG( cout << "IsSuperblockTriggered Not the target block, continuing"
                  << ", nBlockHeight = " << nBlockHeight
-                 << ", superblock->GetBlockStart() = " << pSuperblock->GetBlockStart()
+                 << ", superblock->GetBlockStart() = " << pSuperblock->GetBlockHeight()
                  << endl; );
             continue;
         }
@@ -366,7 +351,7 @@ bool CSuperblockManager::GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int
             continue;
         }
 
-        if(nBlockHeight != pSuperblock->GetBlockStart()) {
+        if(nBlockHeight != pSuperblock->GetBlockHeight()) {
             DBG( cout << "GetBestSuperblock Not the target block, continuing" << endl; );
             continue;
         }
@@ -461,10 +446,22 @@ bool CSuperblockManager::IsValid(const CTransaction& txNew, int nBlockHeight, CA
     return false;
 }
 
+void CSuperblockManager::ExecuteBestSuperblock(int nBlockHeight)
+{
+    LOCK(governance.cs);
+
+    CSuperblock_sptr pSuperblock;
+    if(GetBestSuperblock(pSuperblock, nBlockHeight)) {
+        // All checks are done in CSuperblock::IsValid via IsBlockValueValid and IsBlockPayeeValid,
+        // tip wouldn't be updated if anything was wrong. Mark this trigger as executed.
+        pSuperblock->SetExecuted();
+    }
+}
+
 CSuperblock::
 CSuperblock()
     : nGovObjHash(),
-      nEpochStart(0),
+      nBlockHeight(0),
       nStatus(SEEN_OBJECT_UNKNOWN),
       vecPayments()
 {}
@@ -472,7 +469,7 @@ CSuperblock()
 CSuperblock::
 CSuperblock(uint256& nHash)
     : nGovObjHash(nHash),
-      nEpochStart(0),
+      nBlockHeight(0),
       nStatus(SEEN_OBJECT_UNKNOWN),
       vecPayments()
 {
@@ -498,17 +495,36 @@ CSuperblock(uint256& nHash)
     UniValue obj = pGovObj->GetJSONObject();
 
     // FIRST WE GET THE START EPOCH, THE DATE WHICH THE PAYMENT SHALL OCCUR
-    nEpochStart = obj["event_block_height"].get_int();
+    nBlockHeight = obj["event_block_height"].get_int();
 
     // NEXT WE GET THE PAYMENT INFORMATION AND RECONSTRUCT THE PAYMENT VECTOR
     std::string strAddresses = obj["payment_addresses"].get_str();
     std::string strAmounts = obj["payment_amounts"].get_str();
     ParsePaymentSchedule(strAddresses, strAmounts);
 
-    LogPrint("gobject", "CSuperblock -- nEpochStart = %d, strAddresses = %s, strAmounts = %s, vecPayments.size() = %d\n",
-             nEpochStart, strAddresses, strAmounts, vecPayments.size());
+    LogPrint("gobject", "CSuperblock -- nBlockHeight = %d, strAddresses = %s, strAmounts = %s, vecPayments.size() = %d\n",
+             nBlockHeight, strAddresses, strAmounts, vecPayments.size());
 
     DBG( cout << "CSuperblock Constructor End" << endl; );
+}
+
+void CSuperblock::GetNearestSuperblocksHeights(int nBlockHeight, int& nLastSuperblockRet, int& nNextSuperblockRet)
+{
+    const Consensus::Params& consensusParams = Params().GetConsensus();
+    int nSuperblockStartBlock = consensusParams.nSuperblockStartBlock;
+    int nSuperblockCycle = consensusParams.nSuperblockCycle;
+
+    // Get first superblock
+    int nFirstSuperblockOffset = (nSuperblockCycle - nSuperblockStartBlock % nSuperblockCycle) % nSuperblockCycle;
+    int nFirstSuperblock = nSuperblockStartBlock + nFirstSuperblockOffset;
+
+    if(nBlockHeight < nFirstSuperblock) {
+        nLastSuperblockRet = 0;
+        nNextSuperblockRet = nFirstSuperblock;
+    } else {
+        nLastSuperblockRet = nBlockHeight - nBlockHeight % nSuperblockCycle;
+        nNextSuperblockRet = nLastSuperblockRet + nSuperblockCycle;
+    }
 }
 
 /**
@@ -723,6 +739,43 @@ bool CSuperblock::IsValid(const CTransaction& txNew, int nBlockHeight, CAmount b
 
     return true;
 }
+
+bool CSuperblock::IsExpired()
+{
+    bool fExpired{false};
+    int nExpirationBlocks{0};
+    // Executed triggers are kept for another superblock cycle (approximately 1 month),
+    // other valid triggers are kept for ~1 day only, everything else is pruned after ~1h.
+    switch (nStatus) {
+        case SEEN_OBJECT_EXECUTED:
+            nExpirationBlocks = Params().GetConsensus().nSuperblockCycle;
+            break;
+        case SEEN_OBJECT_IS_VALID:
+            nExpirationBlocks = 576;
+            break;
+        default:
+            nExpirationBlocks = 24;
+            break;
+    }
+
+    int nExpirationBlock = nBlockHeight + nExpirationBlocks;
+
+    LogPrint("gobject", "CSuperblock::IsExpired -- nBlockHeight = %d, nExpirationBlock = %d\n", nBlockHeight, nExpirationBlock);
+
+    if(governance.GetCachedBlockHeight() > nExpirationBlock) {
+        LogPrint("gobject", "CSuperblock::IsExpired -- Outdated trigger found\n");
+        fExpired = true;
+        CGovernanceObject* pgovobj = GetGovernanceObject();
+        if(pgovobj) {
+            LogPrint("gobject", "CSuperblock::IsExpired -- Expiring outdated object: %s\n", pgovobj->GetHash().ToString());
+            pgovobj->fExpired = true;
+            pgovobj->nDeletionTime = GetAdjustedTime();
+        }
+    }
+
+    return fExpired;
+}
+
 
 /**
 *   Get Required Payment String
