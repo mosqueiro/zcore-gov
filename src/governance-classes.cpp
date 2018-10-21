@@ -157,35 +157,26 @@ void CGovernanceTriggerManager::CleanAndRemove()
     DBG( cout << "CGovernanceTriggerManager::CleanAndRemove: Start" << endl; );
     AssertLockHeld(governance.cs);
 
-    // LOOK AT THESE OBJECTS AND COMPILE A VALID LIST OF TRIGGERS
-    for(trigger_m_it it = mapTrigger.begin(); it != mapTrigger.end(); ++it) {
-        //int nNewStatus = -1;
-        CGovernanceObject* pObj = governance.FindGovernanceObject((*it).first);
-        if(!pObj) {
-            continue;
-        }
-        CSuperblock_sptr& pSuperblock = it->second;
-        if(!pSuperblock) {
-            continue;
-        }
-        // IF THIS ISN'T A TRIGGER, WHY ARE WE HERE?
-        if(pObj->GetObjectType() != GOVERNANCE_OBJECT_TRIGGER) {
-            pSuperblock->SetStatus(SEEN_OBJECT_ERROR_INVALID);
-        }
-    }
-
     // Remove triggers that are invalid or already executed
     DBG( cout << "CGovernanceTriggerManager::CleanAndRemove: mapTrigger.size() = " << mapTrigger.size() << endl; );
     LogPrint("gobject", "CGovernanceTriggerManager::CleanAndRemove -- mapTrigger.size() = %d\n", mapTrigger.size());
+
     trigger_m_it it = mapTrigger.begin();
     while(it != mapTrigger.end()) {
         bool remove = false;
+        CGovernanceObject* pObj = NULL;
         CSuperblock_sptr& pSuperblock = it->second;
         if(!pSuperblock) {
             DBG( cout << "CGovernanceTriggerManager::CleanAndRemove: NULL superblock marked for removal " << endl; );
             LogPrint("gobject", "CGovernanceTriggerManager::CleanAndRemove -- NULL superblock marked for removal\n");
             remove = true;
         } else {
+            pObj = governance.FindGovernanceObject(it->first);
+            if(!pObj || pObj->GetObjectType() != GOVERNANCE_OBJECT_TRIGGER) {
+                DBG( cout << "CGovernanceTriggerManager::CleanAndRemove: Unknown or non-trigger superblock" << endl; );
+                LogPrint("gobject", "CGovernanceTriggerManager::CleanAndRemove -- Unknown or non-trigger superblock\n");
+                pSuperblock->SetStatus(SEEN_OBJECT_ERROR_INVALID);
+            }
             DBG( cout << "CGovernanceTriggerManager::CleanAndRemove: superblock status = " << pSuperblock->GetStatus() << endl; );
             LogPrint("gobject", "CGovernanceTriggerManager::CleanAndRemove -- superblock status = %d\n", pSuperblock->GetStatus());
             switch(pSuperblock->GetStatus()) {
@@ -206,15 +197,20 @@ void CGovernanceTriggerManager::CleanAndRemove()
         if(remove) {
             DBG(
                 string strdata = "NULL";
-                CGovernanceObject* pgovobj = pSuperblock->GetGovernanceObject();
-                if(pgovobj) {
-                    strdata = pgovobj->GetDataAsString();
+                if(pObj) {
+                    strdata = pObj->GetDataAsString();
                 }
                 cout << "CGovernanceTriggerManager::CleanAndRemove: Removing object: "
                      << strdata
                      << endl;
                );
             LogPrint("gobject", "CGovernanceTriggerManager::CleanAndRemove -- Removing trigger object\n");
+            if (pObj) {
+                pObj->fCachedDelete = true;
+                if (pObj->nDeletionTime == 0) {
+                    pObj->nDeletionTime = GetAdjustedTime();
+                }
+            }
             mapTrigger.erase(it++);
         }
         else  {

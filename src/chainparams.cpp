@@ -260,7 +260,6 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
-        vSeeds.push_back(CDNSSeedData("zcore.me",  "testnet.zcore.cash"));
 
         // Testnet ZCore addresses start with 'n'
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,112);

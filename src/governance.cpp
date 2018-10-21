@@ -1318,6 +1318,7 @@ void CGovernanceManager::UpdatedBlockTip(const CBlockIndex *pindex)
         pCurrentBlockIndex = pindex;
         nCachedBlockHeight = pCurrentBlockIndex->nHeight;
         LogPrint("gobject", "CGovernanceManager::UpdatedBlockTip pCurrentBlockIndex->nHeight: %d\n", pCurrentBlockIndex->nHeight);
+        CSuperblockManager::ExecuteBestSuperblock(pindex->nHeight);
     }
 }
 
