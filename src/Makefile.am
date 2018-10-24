@@ -99,8 +99,6 @@ BITCOIN_CORE_H = \
   darksend.h \
   dsnotificationinterface.h \
   darksend-relay.h \
-  flat-database.h \
-  hash.h \
   messagesigner.h \
   governance.h \
   governance-classes.h \
@@ -108,6 +106,8 @@ BITCOIN_CORE_H = \
   governance-object.h \
   governance-vote.h \
   governance-votedb.h \
+  flat-database.h \
+  hash.h \
   httprpc.h \
   httpserver.h \
   init.h \
@@ -205,7 +205,6 @@ libbitcoin_server_a_SOURCES = \
   httpserver.cpp \
   init.cpp \
   dbwrapper.cpp \
-  hash.cpp \
   messagesigner.cpp \
   governance.cpp \
   governance-classes.cpp \

@@ -276,7 +276,7 @@ bool CSuperblockManager::IsSuperblockTriggered(int nBlockHeight)
 
     DBG( cout << "IsSuperblockTriggered Number triggers = " << vecTriggers.size() << endl; );
 
-    for(CSuperblock_sptr  pSuperblock : vecTriggers)
+    BOOST_FOREACH(CSuperblock_sptr  pSuperblock, vecTriggers)
     {
         if(!pSuperblock) {
             LogPrintf("CSuperblockManager::IsSuperblockTriggered -- Non-superblock found, continuing\n");
