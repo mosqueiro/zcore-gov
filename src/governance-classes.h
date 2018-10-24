@@ -148,7 +148,7 @@ class CSuperblock : public CGovernanceObject
 private:
     uint256 nGovObjHash;
 
-    int nBlockHeight;
+    int nEpochStart;
     int nStatus;
     std::vector<CGovernancePayment> vecPayments;
 
@@ -178,9 +178,9 @@ public:
         return pObj;
     }
 
-    int GetBlockHeight()
+    int GetBlockStart()
     {
-        return nBlockHeight;
+        return nEpochStart;
     }
 
     int CountPayments() { return (int)vecPayments.size(); }

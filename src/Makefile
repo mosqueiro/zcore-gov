@@ -92,7 +92,7 @@ build_triplet = x86_64-pc-linux-gnu
 host_triplet = x86_64-pc-linux-gnu
 am__append_1 = $(BDB_CPPFLAGS)
 am__append_2 = libbitcoin_wallet.a
-#am__append_3 = libbitcoin_zmq.a
+am__append_3 = libbitcoin_zmq.a
 bin_PROGRAMS = $(am__EXEEXT_1) $(am__EXEEXT_2) $(am__EXEEXT_3) \
 	$(am__EXEEXT_4) $(am__EXEEXT_5) $(am__EXEEXT_6)
 TESTS = $(am__EXEEXT_3) $(am__EXEEXT_6)
@@ -100,7 +100,7 @@ am__append_4 = zcored
 am__append_5 = zcore-cli zcore-tx
 #am__append_6 = compat/glibc_compat.cpp
 #am__append_7 = zcored-res.rc
-#am__append_8 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+am__append_8 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 am__append_9 = libbitcoin_wallet.a
 #am__append_10 = zcore-cli-res.rc
 #am__append_11 = zcore-tx-res.rc
@@ -139,10 +139,10 @@ am__append_20 = leveldb/port/port_posix.cc
 #  test/rpc_wallet_tests.cpp
 
 #am__append_25 = $(LIBBITCOIN_WALLET)
-##am__append_26 = $(ZMQ_LIBS)
+#am__append_26 = $(ZMQ_LIBS)
 #am__append_27 = $(CLEAN_BITCOIN_TEST)
 am__append_28 = bench/bench_zcore
-#am__append_29 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+am__append_29 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 am__append_30 = $(LIBBITCOIN_WALLET)
 am__append_31 = $(CLEAN_BITCOIN_BENCH)
 #am__append_32 = qt/zcore-qt
@@ -181,7 +181,7 @@ am__append_31 = $(CLEAN_BITCOIN_BENCH)
 ##am__append_36 = $(BITCOIN_MM)
 ##am__append_37 = $(BITCOIN_RC)
 #am__append_38 = $(LIBBITCOIN_WALLET)
-##am__append_39 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+#am__append_39 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 #am__append_40 = $(CLEAN_QT)
 #am__append_41 = qt/test/test_zcore-qt
 #am__append_42 = qt/test/test_zcore-qt
@@ -190,7 +190,7 @@ am__append_31 = $(CLEAN_BITCOIN_BENCH)
 #  qt/test/paymentservertests.cpp
 
 #am__append_45 = $(LIBBITCOIN_WALLET)
-##am__append_46 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+#am__append_46 = $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
 #am__append_47 = $(CLEAN_BITCOIN_QT_TEST)
 subdir = src
 SUBDIRS =
@@ -496,9 +496,9 @@ libbitcoin_zmq_a_AR = $(AR) $(ARFLAGS)
 libbitcoin_zmq_a_LIBADD =
 am__libbitcoin_zmq_a_SOURCES_DIST = zmq/zmqabstractnotifier.cpp \
 	zmq/zmqnotificationinterface.cpp zmq/zmqpublishnotifier.cpp
-#am_libbitcoin_zmq_a_OBJECTS = zmq/libbitcoin_zmq_a-zmqabstractnotifier.$(OBJEXT) \
-#	zmq/libbitcoin_zmq_a-zmqnotificationinterface.$(OBJEXT) \
-#	zmq/libbitcoin_zmq_a-zmqpublishnotifier.$(OBJEXT)
+am_libbitcoin_zmq_a_OBJECTS = zmq/libbitcoin_zmq_a-zmqabstractnotifier.$(OBJEXT) \
+	zmq/libbitcoin_zmq_a-zmqnotificationinterface.$(OBJEXT) \
+	zmq/libbitcoin_zmq_a-zmqpublishnotifier.$(OBJEXT)
 libbitcoin_zmq_a_OBJECTS = $(am_libbitcoin_zmq_a_OBJECTS)
 qt_libbitcoinqt_a_AR = $(AR) $(ARFLAGS)
 qt_libbitcoinqt_a_LIBADD =
@@ -968,9 +968,9 @@ bench_bench_zcore_OBJECTS = $(am_bench_bench_zcore_OBJECTS)
 am__DEPENDENCIES_1 = $(am__append_14)
 am__DEPENDENCIES_2 = $(am__append_15)
 am__DEPENDENCIES_3 =
-#am__DEPENDENCIES_4 =  \
-#	$(LIBBITCOIN_ZMQ) \
-#	$(am__DEPENDENCIES_3)
+am__DEPENDENCIES_4 =  \
+	$(LIBBITCOIN_ZMQ) \
+	$(am__DEPENDENCIES_3)
 bench_bench_zcore_DEPENDENCIES =  \
 	$(LIBBITCOIN_SERVER) $(LIBBITCOIN_COMMON) \
 	$(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
@@ -1002,9 +1002,9 @@ am__qt_test_test_zcore_qt_SOURCES_DIST = qt/test/compattests.cpp \
 #	$(am__objects_15)
 qt_test_test_zcore_qt_OBJECTS = $(am_qt_test_test_zcore_qt_OBJECTS) \
 	$(nodist_qt_test_test_zcore_qt_OBJECTS)
-##am__DEPENDENCIES_5 =  \
-##	$(LIBBITCOIN_ZMQ) \
-##	$(am__DEPENDENCIES_3)
+#am__DEPENDENCIES_5 =  \
+#	$(LIBBITCOIN_ZMQ) \
+#	$(am__DEPENDENCIES_3)
 #qt_test_test_zcore_qt_DEPENDENCIES =  \
 #	$(LIBBITCOINQT) $(LIBBITCOIN_SERVER) \
 #	$(am__append_45) $(am__DEPENDENCIES_5) \
@@ -1042,9 +1042,9 @@ am__qt_zcore_qt_SOURCES_DIST = qt/zcore.cpp qt/macdockiconhandler.mm \
 #	qt/qt_zcore_qt-zcore.$(OBJEXT) \
 #	$(am__objects_17) $(am__objects_19)
 qt_zcore_qt_OBJECTS = $(am_qt_zcore_qt_OBJECTS)
-##am__DEPENDENCIES_6 =  \
-##	$(LIBBITCOIN_ZMQ) \
-##	$(am__DEPENDENCIES_3)
+#am__DEPENDENCIES_6 =  \
+#	$(LIBBITCOIN_ZMQ) \
+#	$(am__DEPENDENCIES_3)
 #qt_zcore_qt_DEPENDENCIES = qt/libbitcoinqt.a \
 #	$(LIBBITCOIN_SERVER) $(am__append_38) \
 #	$(am__DEPENDENCIES_6) $(LIBBITCOIN_CLI) \
@@ -1160,8 +1160,8 @@ am__test_test_zcore_SOURCES_DIST = test/arith_uint256_tests.cpp \
 test_test_zcore_OBJECTS = $(am_test_test_zcore_OBJECTS) \
 	$(nodist_test_test_zcore_OBJECTS)
 am__DEPENDENCIES_7 = libbitcoinconsensus.la
-##am__DEPENDENCIES_8 =  \
-##	$(am__DEPENDENCIES_3)
+#am__DEPENDENCIES_8 =  \
+#	$(am__DEPENDENCIES_3)
 #test_test_zcore_DEPENDENCIES =  \
 #	$(LIBBITCOIN_SERVER) $(LIBBITCOIN_CLI) \
 #	$(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) \
@@ -1201,8 +1201,8 @@ am__zcored_SOURCES_DIST = zcored.cpp zcored-res.rc
 #am__objects_25 = zcored-res.$(OBJEXT)
 am_zcored_OBJECTS = zcored-zcored.$(OBJEXT) $(am__objects_25)
 zcored_OBJECTS = $(am_zcored_OBJECTS)
-#am__DEPENDENCIES_9 = $(LIBBITCOIN_ZMQ) \
-#	$(am__DEPENDENCIES_3)
+am__DEPENDENCIES_9 = $(LIBBITCOIN_ZMQ) \
+	$(am__DEPENDENCIES_3)
 zcored_DEPENDENCIES = $(LIBBITCOIN_SERVER) $(LIBBITCOIN_COMMON) \
 	$(LIBUNIVALUE) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_2) $(LIBSECP256K1) \
@@ -1635,7 +1635,7 @@ INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-JAVA = 
+JAVA = /usr/bin/java
 JAVA_COMPARISON_TOOL = 
 LCOV = 
 LD = /usr/bin/ld -m elf_x86_64
@@ -1661,7 +1661,7 @@ MAKEINFO = ${SHELL} /root/mdev/p-zcore/build-aux/missing makeinfo
 MAKENSIS = 
 MANIFEST_TOOL = :
 MINIUPNPC_CPPFLAGS = 
-MINIUPNPC_LIBS = 
+MINIUPNPC_LIBS = -lminiupnpc
 MKDIR_P = /bin/mkdir -p
 MOC = 
 MOC_DEFS = -DHAVE_CONFIG_H -I$(srcdir)
@@ -1736,9 +1736,9 @@ WINDOWS_BITS =
 WINDRES = 
 X11XCB_CFLAGS = 
 X11XCB_LIBS = 
-XGETTEXT = 
+XGETTEXT = /usr/bin/xgettext
 ZMQ_CFLAGS = 
-ZMQ_LIBS = 
+ZMQ_LIBS = -lzmq
 abs_builddir = /root/mdev/p-zcore/src
 abs_srcdir = /root/mdev/p-zcore/src
 abs_top_builddir = /root/mdev/p-zcore
@@ -1996,13 +1996,13 @@ libbitcoin_server_a_SOURCES = \
   versionbits.cpp \
   $(BITCOIN_CORE_H)
 
-#LIBBITCOIN_ZMQ = libbitcoin_zmq.a
-#libbitcoin_zmq_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(ZMQ_CFLAGS)
-#libbitcoin_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-#libbitcoin_zmq_a_SOURCES = \
-#  zmq/zmqabstractnotifier.cpp \
-#  zmq/zmqnotificationinterface.cpp \
-#  zmq/zmqpublishnotifier.cpp
+LIBBITCOIN_ZMQ = libbitcoin_zmq.a
+libbitcoin_zmq_a_CPPFLAGS = $(BITCOIN_INCLUDES) $(ZMQ_CFLAGS)
+libbitcoin_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitcoin_zmq_a_SOURCES = \
+  zmq/zmqabstractnotifier.cpp \
+  zmq/zmqnotificationinterface.cpp \
+  zmq/zmqpublishnotifier.cpp
 
 
 # wallet: shared between zcored and zcore-qt, but only linked
@@ -5597,28 +5597,28 @@ libbitcoin_server_a-messagesigner.obj: messagesigner.cpp
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_server_a-messagesigner.obj `if test -f 'messagesigner.cpp'; then $(CYGPATH_W) 'messagesigner.cpp'; else $(CYGPATH_W) '$(srcdir)/messagesigner.cpp'; fi`
 
 libbitcoin_server_a-governance.o: governance.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-governance.o -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-governance.Tpo -c -o libbitcoin_server_a-governance.o `test -f 'governance.cpp' || echo '$(srcdir)/'`governance.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(leveldb_libleveldb_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-governance.o -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-governance.Tpo -c -o libbitcoin_server_a-governance.o `test -f 'governance.cpp' || echo '$(srcdir)/'`governance.cpp
 	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_server_a-governance.Tpo $(DEPDIR)/libbitcoin_server_a-governance.Po
 #	$(AM_V_CXX)source='governance.cpp' object='libbitcoin_server_a-governance.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_server_a-governance.o `test -f 'governance.cpp' || echo '$(srcdir)/'`governance.cpp
 
 libbitcoin_server_a-governance.obj: governance.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-governance.obj -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-governance.Tpo -c -o libbitcoin_server_a-governance.obj `if test -f 'governance.cpp'; then $(CYGPATH_W) 'governance.cpp'; else $(CYGPATH_W) '$(srcdir)/governance.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(leveldb_libleveldb_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-governance.obj -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-governance.Tpo -c -o libbitcoin_server_a-governance.obj `if test -f 'governance.cpp'; then $(CYGPATH_W) 'governance.cpp'; else $(CYGPATH_W) '$(srcdir)/governance.cpp'; fi`
 	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_server_a-governance.Tpo $(DEPDIR)/libbitcoin_server_a-governance.Po
 #	$(AM_V_CXX)source='governance.cpp' object='libbitcoin_server_a-governance.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_server_a-governance.obj `if test -f 'governance.cpp'; then $(CYGPATH_W) 'governance.cpp'; else $(CYGPATH_W) '$(srcdir)/governance.cpp'; fi`
 
 libbitcoin_server_a-governance-classes.o: governance-classes.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-governance-classes.o -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-governance-classes.Tpo -c -o libbitcoin_server_a-governance-classes.o `test -f 'governance-classes.cpp' || echo '$(srcdir)/'`governance-classes.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(leveldb_libleveldb_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-governance-classes.o -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-governance-classes.Tpo -c -o libbitcoin_server_a-governance-classes.o `test -f 'governance-classes.cpp' || echo '$(srcdir)/'`governance-classes.cpp
 	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_server_a-governance-classes.Tpo $(DEPDIR)/libbitcoin_server_a-governance-classes.Po
 #	$(AM_V_CXX)source='governance-classes.cpp' object='libbitcoin_server_a-governance-classes.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_server_a-governance-classes.o `test -f 'governance-classes.cpp' || echo '$(srcdir)/'`governance-classes.cpp
 
 libbitcoin_server_a-governance-classes.obj: governance-classes.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-governance-classes.obj -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-governance-classes.Tpo -c -o libbitcoin_server_a-governance-classes.obj `if test -f 'governance-classes.cpp'; then $(CYGPATH_W) 'governance-classes.cpp'; else $(CYGPATH_W) '$(srcdir)/governance-classes.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(leveldb_libleveldb_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-governance-classes.obj -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-governance-classes.Tpo -c -o libbitcoin_server_a-governance-classes.obj `if test -f 'governance-classes.cpp'; then $(CYGPATH_W) 'governance-classes.cpp'; else $(CYGPATH_W) '$(srcdir)/governance-classes.cpp'; fi`
 	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_server_a-governance-classes.Tpo $(DEPDIR)/libbitcoin_server_a-governance-classes.Po
 #	$(AM_V_CXX)source='governance-classes.cpp' object='libbitcoin_server_a-governance-classes.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \

@@ -313,14 +313,17 @@ void CGovernanceManager::CheckOrphanVotes(CGovernanceObject& govobj, CGovernance
 
 bool CGovernanceManager::AddGovernanceObject(CGovernanceObject& govobj, bool& fAddToSeen, CNode* pfrom)
 {
-    LOCK2(cs_main, cs);
-    std::string strError = "";
 
     DBG( cout << "CGovernanceManager::AddGovernanceObject START" << endl; );
 
+    LOCK2(cs_main, cs);
+    std::string strError = "";
+    
     fAddToSeen = true;
-
     uint256 nHash = govobj.GetHash();
+    std::string strHash = nHash.ToString();
+
+    govobj.UpdateSentinelVariables();
 
     // MAKE SURE THIS OBJECT IS OK
 
@@ -329,59 +332,43 @@ bool CGovernanceManager::AddGovernanceObject(CGovernanceObject& govobj, bool& fA
         return false;
     }
 
-    // IF WE HAVE THIS OBJECT ALREADY, WE DON'T WANT ANOTHER COPY
+    LogPrint("gobject", "CGovernanceManager::AddGovernanceObject -- Adding object: hash = %s, type = %d\n", nHash.ToString(), govobj.GetObjectType());
 
-    if(mapObjects.count(nHash)) {
+    // INSERT INTO OUR GOVERNANCE OBJECT MEMORY
+    // IF WE HAVE THIS OBJECT ALREADY, WE DON'T WANT ANOTHER COPY
+    auto objpair = mapObjects.emplace(nHash, govobj);
+
+    if(!objpair.second) {
         LogPrintf("CGovernanceManager::AddGovernanceObject -- already have governance object %s\n", nHash.ToString());
         return false;
     }
 
-    LogPrint("gobject", "CGovernanceManager::AddGovernanceObject -- Adding object: hash = %s, type = %d\n", nHash.ToString(), govobj.GetObjectType()); 
-
-    if(govobj.nObjectType == GOVERNANCE_OBJECT_WATCHDOG) {
-        // If it's a watchdog, make sure it fits required time bounds
-        if((govobj.GetCreationTime() < GetAdjustedTime() - GOVERNANCE_WATCHDOG_EXPIRATION_TIME ||
-            govobj.GetCreationTime() > GetAdjustedTime() + GOVERNANCE_WATCHDOG_EXPIRATION_TIME)
-            ) {
-            // drop it
-            LogPrint("gobject", "CGovernanceManager::AddGovernanceObject -- CreationTime is out of bounds: hash = %s\n", nHash.ToString());
-            return false;
-        }
-
-        if(!UpdateCurrentWatchdog(govobj)) {
-            // Allow wd's which are not current to be reprocessed
-            fAddToSeen = false;
-            if(pfrom && (nHashWatchdogCurrent != uint256())) {
-                pfrom->PushInventory(CInv(MSG_GOVERNANCE_OBJECT, nHashWatchdogCurrent));
-            }
-            LogPrint("gobject", "CGovernanceManager::AddGovernanceObject -- Watchdog not better than current: hash = %s\n", nHash.ToString());
-            return false;
-        }
-    }
-
-    // INSERT INTO OUR GOVERNANCE OBJECT MEMORY
-    mapObjects.insert(std::make_pair(nHash, govobj));
-
-    // SHOULD WE ADD THIS OBJECT TO ANY OTHER MANANGERS?
-
-    DBG( cout << "CGovernanceManager::AddGovernanceObject Before trigger block, strData = "
-              << govobj.GetDataAsString()
+    DBG( std::cout << "CGovernanceManager::AddGovernanceObject Before trigger block, GetDataAsPlainString = "
+              << govobj.GetDataAsPlainString()
               << ", nObjectType = " << govobj.nObjectType
-              << endl; );
+              << std::endl; );
 
-    switch(govobj.nObjectType) {
-    case GOVERNANCE_OBJECT_TRIGGER:
+    if (govobj.nObjectType == GOVERNANCE_OBJECT_TRIGGER) {
+        cout << "Trigger!" << endl;
         DBG( cout << "CGovernanceManager::AddGovernanceObject Before AddNewTrigger" << endl; );
-        triggerman.AddNewTrigger(nHash);
-        DBG( cout << "CGovernanceManager::AddGovernanceObject After AddNewTrigger" << endl; );
-        break;
-    case GOVERNANCE_OBJECT_WATCHDOG:
-        mapWatchdogObjects[nHash] = govobj.GetCreationTime() + GOVERNANCE_WATCHDOG_EXPIRATION_TIME;
-        LogPrint("gobject", "CGovernanceManager::AddGovernanceObject -- Added watchdog to map: hash = %s\n", nHash.ToString());
-        break;
-    default:
-        break;
+        if (!triggerman.AddNewTrigger(nHash)) {
+            LogPrint("gobject", "CGovernanceManager::AddGovernanceObject -- undo adding invalid trigger object: hash = %s\n", strHash);
+            CGovernanceObject& objref = objpair.first->second;
+            objref.fCachedDelete = true;
+            if (objref.nDeletionTime == 0) {
+                objref.nDeletionTime = GetAdjustedTime();
+            }
+            return false;
+        }
+        DBG( std::cout << "CGovernanceManager::AddGovernanceObject After AddNewTrigger" << std::endl; );
     }
+
+    govobj.Relay();
+
+    // WE MIGHT HAVE PENDING/ORPHAN VOTES FOR THIS OBJECT
+
+    CGovernanceException exception;
+    CheckOrphanVotes(govobj, exception);
 
     DBG( cout << "CGovernanceManager::AddGovernanceObject END" << endl; );
 
@@ -842,7 +829,7 @@ bool CGovernanceManager::MasternodeRateCheck(const CGovernanceObject& govobj, up
     }
 
     int64_t nTimestamp = govobj.GetCreationTime();
-    int64_t nNow = GetTime();
+    int64_t nNow = GetAdjustedTime();
     int64_t nSuperblockCycleSeconds = Params().GetConsensus().nSuperblockCycle * Params().GetConsensus().nPowTargetSpacing;
 
     const CTxIn& vin = govobj.GetMasternodeVin();
@@ -884,58 +871,25 @@ bool CGovernanceManager::MasternodeRateCheck(const CGovernanceObject& govobj, up
                  strHash, vin.prevout.ToStringShort(), nTimestamp, nNow);
         return false;
     }
-    
-    double dMaxRate = 1.1 / nSuperblockCycleSeconds;
-    double dRate = 0.0;
-    CRateCheckBuffer buffer;
-    CRateCheckBuffer* pBuffer = NULL;
-    switch(nObjectType) {
-    case GOVERNANCE_OBJECT_TRIGGER:
-        // Allow 1 trigger per mn per cycle, with a small fudge factor
-        pBuffer = &it->second.triggerBuffer;
-        dMaxRate = 2 * 1.1 / double(nSuperblockCycleSeconds);
-        break;
-    case GOVERNANCE_OBJECT_WATCHDOG:
-        pBuffer = &it->second.watchdogBuffer;
-        dMaxRate = 2 * 1.1 / 3600.;
-        break;
-    default:
-        break;
-    }
 
-    if(!pBuffer) {
-        LogPrintf("CGovernanceManager::MasternodeRateCheck -- Internal Error returning false, NULL ptr found for object %s masternode vin = %s, timestamp = %d, current time = %d\n",
-                  strHash, vin.prevout.ToStringShort(), nTimestamp, nNow);
-        return false;
+    if(it->second.fStatusOK && !fForce) {
+        fRateCheckBypassed = true;
+        return true;
     }
+ 
+    double dMaxRate = 2 * 1.1 / double(nSuperblockCycleSeconds);
+    CRateCheckBuffer buffer = it->second.triggerBuffer;
 
-    buffer = *pBuffer;
     buffer.AddTimestamp(nTimestamp);
-    dRate = buffer.GetRate();
+    double dRate = buffer.GetRate();
 
-    bool fRateOK = ( dRate < dMaxRate );
-
-    switch(eUpdateLast) {
-    case UPDATE_TRUE:
-        pBuffer->AddTimestamp(nTimestamp);
-        it->second.fStatusOK = fRateOK;
-        break;
-    case UPDATE_FAIL_ONLY:
-        if(!fRateOK) {
-            pBuffer->AddTimestamp(nTimestamp);
-            it->second.fStatusOK = false;
-        }
-    default:
+    if(dRate < dMaxRate) {
         return true;
     }
 
-    if(fRateOK) {
-        return true;
-    }
-    else {
-        LogPrintf("CGovernanceManager::MasternodeRateCheck -- Rate too high: object hash = %s, masternode vin = %s, object timestamp = %d, rate = %f, max rate = %f\n",
-                  strHash, vin.prevout.ToStringShort(), nTimestamp, dRate, dMaxRate);
-    }
+    LogPrintf("CGovernanceManager::MasternodeRateCheck -- Rate too high: object hash = %s, masternode = %s, object timestamp = %d, rate = %f, max rate = %f\n",
+              strHash, vin.prevout.ToStringShort(), nTimestamp, dRate, dMaxRate);
+
     return false;
 }
 
