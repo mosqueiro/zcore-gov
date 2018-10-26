@@ -92,6 +92,13 @@ CAmount ParsePaymentAmount(const std::string& strAmount)
         throw std::runtime_error(ostr.str());
     }
 
+    CAmount sb = CSuperblock::GetPaymentsLimit(Params().GetConsensus().nSuperblockStartBlock);
+    if (nAmount > sb) {
+        nAmount = 0;
+        std::ostringstream ostr;
+        ostr << "ParsePaymentAmount: Invalid amount string, value higher than superblock reward";
+        throw std::runtime_error(ostr.str());
+    }
     DBG( cout << "ParsePaymentAmount Returning true nAmount = " << nAmount << endl; );
 
     return nAmount;

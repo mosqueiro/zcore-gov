@@ -2743,6 +2743,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
     CAmount blockReward = nFees + GetBlockSubsidy(pindex->pprev->nBits, pindex->pprev->nHeight, chainparams.GetConsensus());
     std::string strError = "";
     if (!IsBlockValueValid(block, pindex->nHeight, blockReward, strError)) {
+        cout << "Block Reward" << blockReward << endl;
         return state.DoS(0, error("ConnectBlock(ZCR): %s", strError), REJECT_INVALID, "bad-cb-amount");
     }
 
