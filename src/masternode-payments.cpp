@@ -44,9 +44,9 @@ bool IsBlockValueValid(const CBlock& block, int nBlockHeight, CAmount blockRewar
 
     const Consensus::Params& consensusParams = Params().GetConsensus();
 
-    if(nBlockHeight < consensusParams.nSuperblockStartBlock) {
+    if(consensusParams.SuperblockBlockStart(nBlockHeight)) {
         int nOffset = nBlockHeight % consensusParams.nBudgetPaymentsCycleBlocks;
-        if(nBlockHeight >= consensusParams.nBudgetPaymentsStartBlock &&
+        if(consensusParams.BudgetBlockStart(nBlockHeight) &&
             nOffset < consensusParams.nBudgetPaymentsWindowBlocks) {
             // NOTE: make sure SPORK_13_OLD_SUPERBLOCK_FLAG is disabled when 12.1 starts to go live
             if(masternodeSync.IsSynced()) {
@@ -144,7 +144,7 @@ bool IsBlockPayeeValid(const CTransaction& txNew, int nBlockHeight, CAmount bloc
 
     const Consensus::Params& consensusParams = Params().GetConsensus();
 
-    if(nBlockHeight < consensusParams.nSuperblockStartBlock) {
+    if(consensusParams.SuperblockBlockStart(nBlockHeight)) {
      LogPrint("gobject", "IsBlockPayeeValid -- WARNING: Client synced but old budget system is disabled, accepting any payee\n");
      return true; 
     }

@@ -72,12 +72,12 @@ public:
         consensus.nMasternodePaymentsIncreaseBlock = 158000; // not used
         consensus.nMasternodePaymentsIncreasePeriod = 576*30; // not used
         consensus.nInstantSendKeepLock = 24;
-        consensus.nBudgetPaymentsStartBlock = 22180; // year 10000+
-        consensus.nBudgetPaymentsCycleBlocks = 20160;//21 days;
+        consensus.nBudgetPaymentsStartBlock = 22180; // ZCore: -- soft fork to BudgetStartBlock
+        consensus.nBudgetPaymentsCycleBlocks = 20160; //21 days;
         consensus.nBudgetPaymentsWindowBlocks = 100;
         consensus.nBudgetProposalEstablishingTime = 60*60*24;
-        consensus.nSuperblockStartBlock = 22180; // year 10000+
-        consensus.nSuperblockCycle = 20160;//21 days
+        consensus.nSuperblockStartBlock = 22180; // ZCore: -- soft fork to SuperblockStartBlock
+        consensus.nSuperblockCycle = 20160; // 24 days
         consensus.nGovernanceMinQuorum = 10;
         consensus.nGovernanceFilterElements = 20000;
         consensus.nMasternodeMinimumConfirmations = 15;
@@ -107,6 +107,10 @@ public:
         // Consensus Update Ago 2018
         consensus.mPowDGWReconfigureAgo2018Height = 135000;
         consensus.nPowAgo2018TargetSpacing = 1.5 * 60;
+  
+        // Consensus Update Oct 2018
+        consensus.nBudgetInitialFork = 210000;
+        consensus.nSuperblockInitialFork = 230160; // should be higher than budget
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -206,7 +210,7 @@ public:
         consensus.nMasternodePaymentsIncreaseBlock = 46000;
         consensus.nMasternodePaymentsIncreasePeriod = 576;
         consensus.nInstantSendKeepLock = 6;
-        consensus.nBudgetPaymentsStartBlock = 100;
+        consensus.nBudgetPaymentsStartBlock = 100; // ZCore: -- soft fork to BudgetStartBlock
         consensus.nBudgetPaymentsCycleBlocks = 50;
         consensus.nBudgetPaymentsWindowBlocks = 10;
         consensus.nBudgetProposalEstablishingTime = 60*20;
@@ -241,6 +245,10 @@ public:
         // Consensus Update Ago 2018
         consensus.mPowDGWReconfigureAgo2018Height = 550;
         consensus.nPowAgo2018TargetSpacing = 2 * 60;
+
+        // Consensus Update Oct 2018
+        consensus.nBudgetInitialFork = 100;
+        consensus.nSuperblockInitialFork = 124; // should be higher than budget
 
         pchMessageStart[0] = 0x1a;
         pchMessageStart[1] = 0x11;
@@ -345,6 +353,10 @@ public:
         // Consensus Update Apr 2018
         consensus.mPowDGWReconfigureAgo2018Height = 1;
         consensus.nPowAgo2018TargetSpacing = 2 * 60;
+
+        // Consensus Update Oct 2018
+        consensus.nBudgetInitialFork = 1000;
+        consensus.nSuperblockInitialFork = 1500; // should be higher than budget
 
         pchMessageStart[0] = 0x1a;
         pchMessageStart[1] = 0x12;

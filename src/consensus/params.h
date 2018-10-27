@@ -93,6 +93,20 @@ struct Params {
             return 24;
         }
     }
+    int nBudgetInitialFork;
+    bool BudgetBlockStart(int blockHeight) const {
+        if (blockHeight >= nBudgetInitialFork) {
+          return true;
+        }
+        return false;
+   }
+   int nSuperblockInitialFork;
+   bool SuperblockBlockStart(int blockHeight) const {
+        if (blockHeight >= nSuperblockInitialFork) {
+          return true;
+        }
+        return false;
+   }
 
 };
 } // namespace Consensus

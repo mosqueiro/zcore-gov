@@ -539,7 +539,7 @@ CSuperblock(uint256& nHash)
 void CSuperblock::GetNearestSuperblocksHeights(int nBlockHeight, int& nLastSuperblockRet, int& nNextSuperblockRet)
 {
     const Consensus::Params& consensusParams = Params().GetConsensus();
-    int nSuperblockStartBlock = consensusParams.nSuperblockStartBlock;
+    int nSuperblockStartBlock = consensusParams.nSuperblockInitialFork;
     int nSuperblockCycle = consensusParams.nSuperblockCycle;
 
     // Get first superblock
@@ -564,7 +564,7 @@ void CSuperblock::GetNearestSuperblocksHeights(int nBlockHeight, int& nLastSuper
 bool CSuperblock::IsValidBlockHeight(int nBlockHeight)
 {
     // SUPERBLOCKS CAN HAPPEN ONLY after hardfork and only ONCE PER CYCLE
-    return nBlockHeight >= Params().GetConsensus().nSuperblockStartBlock &&
+    return Params().GetConsensus().SuperblockBlockStart(nBlockHeight) &&
             ((nBlockHeight % Params().GetConsensus().nSuperblockCycle) == 0);
 }
 
