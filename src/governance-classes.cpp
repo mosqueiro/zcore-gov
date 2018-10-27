@@ -316,11 +316,19 @@ bool CSuperblockManager::IsSuperblockTriggered(int nBlockHeight)
 
         // note : 12.1 - is epoch calculation correct?
 
-        cout << "Test: " << nBlockHeight << "==" << pSuperblock->GetBlockStart() << endl;
         if(nBlockHeight != pSuperblock->GetBlockStart()) {
             LogPrint("gobject", "CSuperblockManager::IsSuperblockTriggered -- block height doesn't match nBlockHeight = %d, blockStart = %d, continuing\n",
                      nBlockHeight,
                      pSuperblock->GetBlockStart());
+ 
+            if (pSuperblock->GetBlockStart() < nBlockHeight) {
+                pObj->fCachedDelete = true;
+                if (pObj->nDeletionTime == 0) {
+                    pObj->nDeletionTime = GetAdjustedTime();
+                }
+                LogPrint("gobject", "CSuperblockManager::IsSuperblockTriggered -- Trigger expired nBlockHeight = %d, deletion is set \n",pSuperblock->GetBlockStart());
+                continue;
+            }
             DBG( cout << "IsSuperblockTriggered Not the target block, continuing"
                  << ", nBlockHeight = " << nBlockHeight
                  << ", superblock->GetBlockStart() = " << pSuperblock->GetBlockStart()

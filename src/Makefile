@@ -1640,7 +1640,7 @@ LCOV =
 LD = /usr/bin/ld -m elf_x86_64
 LDFLAGS = 
 LEVELDB_ATOMIC_CPPFLAGS = -DLEVELDB_ATOMIC_PRESENT
-LEVELDB_ATOMIC_CXXFLAGS = -std=c++0x
+LEVELDB_ATOMIC_CXXFLAGS = -std=c++11
 LEVELDB_CPPFLAGS =  $(am__append_16)
 LEVELDB_TARGET_FLAGS = -DOS_LINUX
 LIBLEVELDB =  $(am__append_14)
@@ -5580,14 +5580,14 @@ libbitcoin_server_a-messagesigner.obj: messagesigner.cpp
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_server_a-messagesigner.obj `if test -f 'messagesigner.cpp'; then $(CYGPATH_W) 'messagesigner.cpp'; else $(CYGPATH_W) '$(srcdir)/messagesigner.cpp'; fi`
 
 libbitcoin_server_a-governance.o: governance.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-governance.o -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-governance.Tpo -c -o libbitcoin_server_a-governance.o `test -f 'governance.cpp' || echo '$(srcdir)/'`governance.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(leveldb_libleveldb_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-governance.o -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-governance.Tpo -c -o libbitcoin_server_a-governance.o `test -f 'governance.cpp' || echo '$(srcdir)/'`governance.cpp
 	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_server_a-governance.Tpo $(DEPDIR)/libbitcoin_server_a-governance.Po
 #	$(AM_V_CXX)source='governance.cpp' object='libbitcoin_server_a-governance.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -c -o libbitcoin_server_a-governance.o `test -f 'governance.cpp' || echo '$(srcdir)/'`governance.cpp
 
 libbitcoin_server_a-governance.obj: governance.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-governance.obj -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-governance.Tpo -c -o libbitcoin_server_a-governance.obj `if test -f 'governance.cpp'; then $(CYGPATH_W) 'governance.cpp'; else $(CYGPATH_W) '$(srcdir)/governance.cpp'; fi`
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libbitcoin_server_a_CPPFLAGS) $(CPPFLAGS) $(libbitcoin_server_a_CXXFLAGS) $(leveldb_libleveldb_a_CXXFLAGS) $(CXXFLAGS) -MT libbitcoin_server_a-governance.obj -MD -MP -MF $(DEPDIR)/libbitcoin_server_a-governance.Tpo -c -o libbitcoin_server_a-governance.obj `if test -f 'governance.cpp'; then $(CYGPATH_W) 'governance.cpp'; else $(CYGPATH_W) '$(srcdir)/governance.cpp'; fi`
 	$(AM_V_at)$(am__mv) $(DEPDIR)/libbitcoin_server_a-governance.Tpo $(DEPDIR)/libbitcoin_server_a-governance.Po
 #	$(AM_V_CXX)source='governance.cpp' object='libbitcoin_server_a-governance.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \

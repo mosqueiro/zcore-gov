@@ -115,6 +115,8 @@ class CGovernanceObject
     friend class CGovernanceTriggerManager; 
     
     friend class CSuperblock;
+   
+    friend class CSuperblockManager;
 
 public: // Types
     typedef std::map<int, vote_rec_t> vote_m_t;

@@ -65,6 +65,7 @@ public:
 
 class CSuperblockManager
 {
+	
 private:
     static bool GetBestSuperblock(CSuperblock_sptr& pSuperblockRet, int nBlockHeight);
 
