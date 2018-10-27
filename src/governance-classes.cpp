@@ -92,7 +92,20 @@ CAmount ParsePaymentAmount(const std::string& strAmount)
         throw std::runtime_error(ostr.str());
     }
 
-    CAmount sb = CSuperblock::GetPaymentsLimit(Params().GetConsensus().nSuperblockStartBlock);
+
+    // ACCEPT ONLY PAYMENT LOWER THAN PAYMENT LIMIT
+
+    int nLastSuperblock, nNextSuperblock;
+
+    // Get current block height
+    int nBlockHeight = 0;
+    {
+        LOCK(cs_main);
+        nBlockHeight = (int)chainActive.Height();
+    }
+
+    CSuperblock::GetNearestSuperblocksHeights(nBlockHeight, nLastSuperblock, nNextSuperblock);
+    CAmount sb = CSuperblock::GetPaymentsLimit(nLastSuperblock);
     if (nAmount > sb) {
         nAmount = 0;
         std::ostringstream ostr;
@@ -550,7 +563,7 @@ bool CSuperblock::IsValidBlockHeight(int nBlockHeight)
 CAmount CSuperblock::GetPaymentsLimit(int nBlockHeight)
 {
     const Consensus::Params& consensusParams = Params().GetConsensus();
-    
+
     if(!IsValidBlockHeight(nBlockHeight)) {
         return 0;
     }
