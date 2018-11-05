@@ -109,8 +109,8 @@ public:
         consensus.nPowAgo2018TargetSpacing = 1.5 * 60;
   
         // Consensus Update Oct 2018
-        consensus.nBudgetInitialFork = 210000;
-        consensus.nSuperblockInitialFork = 230160; // should be higher than budget
+        consensus.nBudgetInitialFork = 240000; // should start before superblock
+        consensus.nSuperblockInitialFork = 260160; // should start after budget
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -214,8 +214,8 @@ public:
         consensus.nBudgetPaymentsCycleBlocks = 50;
         consensus.nBudgetPaymentsWindowBlocks = 10;
         consensus.nBudgetProposalEstablishingTime = 60*20;
-        consensus.nSuperblockStartBlock = 124; // NOTE: Should satisfy nSuperblockStartBlock > nBudgetPaymentsStartBlock
-        consensus.nSuperblockCycle = 24; // Superblocks can be issued hourly on testnet
+        consensus.nSuperblockStartBlock = 150; // NOTE: Should satisfy nSuperblockStartBlock > nBudgetPaymentsStartBlock
+        consensus.nSuperblockCycle = 50; // Superblocks can be issued hourly on testnet
         consensus.nGovernanceMinQuorum = 1;
         consensus.nGovernanceFilterElements = 500;
         consensus.nMasternodeMinimumConfirmations = 1;
@@ -248,7 +248,7 @@ public:
 
         // Consensus Update Oct 2018
         consensus.nBudgetInitialFork = 100;
-        consensus.nSuperblockInitialFork = 124; // should be higher than budget
+        consensus.nSuperblockInitialFork = 150; // should be higher than budget
 
         pchMessageStart[0] = 0x1a;
         pchMessageStart[1] = 0x11;

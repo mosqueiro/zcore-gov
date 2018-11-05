@@ -865,7 +865,7 @@ UniValue getgovernanceinfo(const UniValue& params, bool fHelp)
     }
 
     // Get chain parameters
-    int nSuperblockStartBlock = Params().GetConsensus().nSuperblockStartBlock;
+    int nSuperblockStartBlock = Params().GetConsensus().nSuperblockInitialFork;
     int nSuperblockCycle = Params().GetConsensus().nSuperblockCycle;
 
     // Get first superblock

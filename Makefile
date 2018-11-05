@@ -289,6 +289,7 @@ BOOST_SYSTEM_LIB = -lboost_system
 BOOST_THREAD_LIB = -lboost_thread
 BOOST_UNIT_TEST_FRAMEWORK_LIB = 
 BREW = 
+C11FLAGS = -std=c++11
 CC = gcc
 CCACHE = 
 CCDEPMODE = depmode=gcc3

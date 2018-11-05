@@ -144,7 +144,6 @@ bool CGovernanceObject::ProcessVote(CNode* pfrom,
 
     // Reject obsolete votes
     if(vote.GetTimestamp() < voteInstance.nCreationTime) {
-        cout << "Voto antigo" << endl;
         std::ostringstream ostr;
         ostr << "CGovernanceObject::ProcessVote -- Obsolete vote" << "\n";
         LogPrint("gobject", ostr.str().c_str());
@@ -683,8 +682,6 @@ void CGovernanceObject::UpdateSentinelVariables()
     //nAbsVoteReq = 1;
 
     // SET SENTINEL FLAGS TO FALSE
-    cout << "Voto necessario" << nAbsVoteReq << endl;
-
     fCachedFunding = false;
     fCachedValid = true; //default to valid
     fCachedEndorsed = false;
