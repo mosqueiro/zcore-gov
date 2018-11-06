@@ -109,6 +109,7 @@ BITCOIN_CORE_H = \
   darksend.h \
   dsnotificationinterface.h \
   darksend-relay.h \
+  messagesigner.h \
   governance.h \
   governance-brain.h \
   governance-classes.h \
@@ -201,7 +202,7 @@ libbitcoin_util_a-clientversion.$(OBJEXT): obj/build.h
 
 # server: shared between zcored and zcore-qt
 libbitcoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
-libbitcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) 
 libbitcoin_server_a_SOURCES = \
   addrman.cpp \
   alert.cpp \
@@ -251,12 +252,13 @@ endif
 # wallet: shared between zcored and zcore-qt, but only linked
 # when wallet enabled
 libbitcoin_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libbitcoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitcoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) $(COOFLAGS)
 libbitcoin_wallet_a_SOURCES = \
   activemasternode.cpp \
   darksend.cpp \
   dsnotificationinterface.cpp \
   darksend-relay.cpp \
+  messagesigner.cpp \
   governance.cpp \
   governance-brain.cpp \ 
   governance-classes.cpp \

@@ -334,14 +334,37 @@ bool CGovernanceManager::AddGovernanceObject(CGovernanceObject& govobj, bool& fA
 
     LogPrint("gobject", "CGovernanceManager::AddGovernanceObject -- Adding object: hash = %s, type = %d\n", nHash.ToString(), govobj.GetObjectType());
 
-    // INSERT INTO OUR GOVERNANCE OBJECT MEMORY
-    // IF WE HAVE THIS OBJECT ALREADY, WE DON'T WANT ANOTHER COPY
-    auto objpair = mapObjects.emplace(nHash, govobj);
 
-    if(!objpair.second) {
+    if(mapObjects.count(nHash)) {
         LogPrintf("CGovernanceManager::AddGovernanceObject -- already have governance object %s\n", nHash.ToString());
         return false;
     }
+
+    LogPrint("gobject", "CGovernanceManager::AddGovernanceObject -- Adding object: hash = %s, type = %d\n", nHash.ToString(), govobj.GetObjectType()); 
+
+    if(govobj.nObjectType == GOVERNANCE_OBJECT_WATCHDOG) {
+        // If it's a watchdog, make sure it fits required time bounds
+        if((govobj.GetCreationTime() < GetAdjustedTime() - GOVERNANCE_WATCHDOG_EXPIRATION_TIME ||
+            govobj.GetCreationTime() > GetAdjustedTime() + GOVERNANCE_WATCHDOG_EXPIRATION_TIME)
+            ) {
+            // drop it
+            LogPrint("gobject", "CGovernanceManager::AddGovernanceObject -- CreationTime is out of bounds: hash = %s\n", nHash.ToString());
+            return false;
+        }
+
+        if(!UpdateCurrentWatchdog(govobj)) {
+            // Allow wd's which are not current to be reprocessed
+            fAddToSeen = false;
+            if(pfrom && (nHashWatchdogCurrent != uint256())) {
+                pfrom->PushInventory(CInv(MSG_GOVERNANCE_OBJECT, nHashWatchdogCurrent));
+            }
+            LogPrint("gobject", "CGovernanceManager::AddGovernanceObject -- Watchdog not better than current: hash = %s\n", nHash.ToString());
+            return false;
+        }
+    }
+
+    // INSERT INTO OUR GOVERNANCE OBJECT MEMORY
+    mapObjects.insert(std::make_pair(nHash, govobj));
 
     DBG( std::cout << "CGovernanceManager::AddGovernanceObject Before trigger block, GetDataAsPlainString = "
               << govobj.GetDataAsPlainString()
@@ -349,14 +372,18 @@ bool CGovernanceManager::AddGovernanceObject(CGovernanceObject& govobj, bool& fA
               << std::endl; );
 
     if (govobj.nObjectType == GOVERNANCE_OBJECT_TRIGGER) {
-        cout << "Trigger!" << endl;
         DBG( cout << "CGovernanceManager::AddGovernanceObject Before AddNewTrigger" << endl; );
         if (!triggerman.AddNewTrigger(nHash)) {
             LogPrint("gobject", "CGovernanceManager::AddGovernanceObject -- undo adding invalid trigger object: hash = %s\n", strHash);
-            CGovernanceObject& objref = objpair.first->second;
-            objref.fCachedDelete = true;
-            if (objref.nDeletionTime == 0) {
-                objref.nDeletionTime = GetAdjustedTime();
+            for(object_m_it it = mapObjects.begin(); it != mapObjects.end(); ++it) {
+              if (it->first == nHash) {
+                CGovernanceObject& govobj = it->second;
+                govobj.fCachedDelete = true;
+                if (govobj.nDeletionTime == 0) {
+                   govobj.nDeletionTime = GetAdjustedTime();
+                }
+                break;
+              }
             }
             return false;
         }
