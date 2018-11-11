@@ -376,7 +376,7 @@ bool CGovernanceManager::AddGovernanceObject(CGovernanceObject& govobj, bool& fA
         if (!triggerman.AddNewTrigger(nHash)) {
             LogPrint("gobject", "CGovernanceManager::AddGovernanceObject -- undo adding invalid trigger object: hash = %s\n", strHash);
             for(object_m_it it = mapObjects.begin(); it != mapObjects.end(); ++it) {
-              if (it->first == nHash) {
+              if (it->first == nHash && it->second.nObjectType == GOVERNANCE_OBJECT_TRIGGER) {
                 CGovernanceObject& govobj = it->second;
                 govobj.fCachedDelete = true;
                 if (govobj.nDeletionTime == 0) {
