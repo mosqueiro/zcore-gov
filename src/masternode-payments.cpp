@@ -44,7 +44,8 @@ bool IsBlockValueValid(const CBlock& block, int nBlockHeight, CAmount blockRewar
 
     const Consensus::Params& consensusParams = Params().GetConsensus();
 
-    if(consensusParams.SuperblockBlockStart(nBlockHeight)) {
+    //Superblock is not enabled here
+    if(!consensusParams.SuperblockBlockStart(nBlockHeight)) {
         int nOffset = nBlockHeight % consensusParams.nBudgetPaymentsCycleBlocks;
         if(consensusParams.BudgetBlockStart(nBlockHeight) &&
             nOffset < consensusParams.nBudgetPaymentsWindowBlocks) {
